@@ -8,7 +8,7 @@ class TestScanner{
 		scanner = new NumScanner();
 		String filePath = new File("").getAbsolutePath();
 		System.out.println("path" + filePath);
-		if (scanner.readInput(filePath + "\\testdatei_arithmetik.txt")){
+		if (scanner.readInputEmoji(filePath + "\\testdatei_arithmetik_emoji.txt")){
 			scanner.printInputStream();
 			if(scanner.lexicalAnalysis())
 				scanner.printTokenStream();
