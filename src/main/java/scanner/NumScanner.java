@@ -3,8 +3,8 @@ package scanner;
 /*
 	NunScanner.java
 	
-	Diese Klasse implementiert die Zustnde und Transitionstabelle eines DEA für 
-	Ziffernfolgen nach dem folgenden regulären Ausdruck:
+	Diese Klasse implementiert die Zustnde und Transitionstabelle eines DEA fï¿½r 
+	Ziffernfolgen nach dem folgenden regulï¿½ren Ausdruck:
 	
 													+
 	NUM := {'1'|'2'|'3'|'4'|'5'|'6'|'7'|'8'|'9'|'0'}
@@ -13,11 +13,11 @@ package scanner;
 class NumScanner extends Scanner{
 	
 	//-------------------------------------------------------------------------
-	// Konstruktor (Legt die Zustände und Transitionstabelle des DEA an)
+	// Konstruktor (Legt die Zustï¿½nde und Transitionstabelle des DEA an)
 	//-------------------------------------------------------------------------
 	
 	NumScanner(){
-		// Transitionstabelle zum regulären Ausdruck
+		// Transitionstabelle zum regulï¿½ren Ausdruck
 		//	    											+
 		// NUM := {'1'|'2'|'3'|'4'|'5'|'6'|'7'|'8'|'9'|'0'}
 		
@@ -41,13 +41,13 @@ class NumScanner extends Scanner{
 		/*{*/			{{}, 	{},																											{},		{},		{},		{},		{},		{},																												{},											{},		{},		{},		{},		{},		{},		{}},
 		/*}*/			{{}, 	{},																											{},		{},		{},		{},		{},		{},																												{},											{},		{},		{},		{},		{},		{},		{}}};
 		//				-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-		// Zustände zum DEA 
+		// Zustï¿½nde zum DEA 
 		byte states[]={START, IDENT, UNDERSCORE, LESS_THAN, MINUS, FIRST_COLON, SECOND_COLON, EMOJI_CHARAKTER, NUM, SEMICOLON, HASHTAG, DOUBLE_QUOTES, OPEN_PAR, CLOSE_PAR, OPEN_CURLY_BRACKET, CLOSE_CURLY_BRACKET};
 		// Instanz des DEA anlegen
 		this.dea=new DEA(transitions, states);
 	}
 	
-	// Gibt den zum Zahlenwert passenden String des Tokentyps zurück
+	// Gibt den zum Zahlenwert passenden String des Tokentyps zurï¿½ck
 	// Implementierung der abstrakten Methode aus der Klasse Scanner
 	String getTokenString(byte token){
 		switch(token){
