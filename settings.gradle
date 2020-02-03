@@ -1,2 +1,3 @@
 rootProject.name = 'emoji-island-language'
+include 'runtime'
 
