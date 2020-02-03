@@ -6,9 +6,9 @@ package scanner;
 	Praktikum Algorithmen und Datenstrukturen
 	Beispiel zum Versuch 2
 
-	Die Schnittstelle TokenList stellt die Konstanten für die
-	Knotentypen eines Syntaxbaumes (Token) für Ziffernfolgen
-	zur Verfügung.
+	Die Schnittstelle TokenList stellt die Konstanten fï¿½r die
+	Knotentypen eines Syntaxbaumes (Token) fï¿½r Ziffernfolgen
+	zur Verfï¿½gung.
 */
 
 interface TokenList {
@@ -23,8 +23,8 @@ interface TokenList {
 				NOT_FINAL=6,
 				SEMICOLON=7,
 				IDENT=8,
-				OPEN_PAR=9,
-				CLOSE_PAR=10,
+				OPEN_PARENTHESES =9,
+				CLOSE_PARENTHESES =10,
 				OPEN_CURLY_BRACKET=11,
 				CLOSE_CURLY_BRACKET=12,
 				HASHTAG=13,

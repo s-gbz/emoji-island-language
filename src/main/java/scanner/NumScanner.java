@@ -42,7 +42,7 @@ class NumScanner extends Scanner{
 		/*}*/			{{}, 	{},																											{},		{},		{},		{},		{},		{},																												{},											{},		{},		{},		{},		{},		{},		{}}};
 		//				-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 		// Zust�nde zum DEA 
-		byte states[]={START, IDENT, UNDERSCORE, LESS_THAN, MINUS, FIRST_COLON, SECOND_COLON, EMOJI_CHARAKTER, NUM, SEMICOLON, HASHTAG, DOUBLE_QUOTES, OPEN_PAR, CLOSE_PAR, OPEN_CURLY_BRACKET, CLOSE_CURLY_BRACKET};
+		byte states[]={START, IDENT, UNDERSCORE, LESS_THAN, MINUS, FIRST_COLON, SECOND_COLON, EMOJI_CHARAKTER, NUM, SEMICOLON, HASHTAG, DOUBLE_QUOTES, OPEN_PARENTHESES, CLOSE_PARENTHESES, OPEN_CURLY_BRACKET, CLOSE_CURLY_BRACKET};
 		// Instanz des DEA anlegen
 		this.dea=new DEA(transitions, states);
 	}
@@ -56,8 +56,8 @@ class NumScanner extends Scanner{
 			case  5: return "START";
 			case  7: return "SEMICOLON";
 			case  8: return "IDENTIFIER";
-			case  9: return "OPEN_PAR";
-			case 10: return "CLOSE_PAR";
+			case  9: return "OPEN_PARENTHESES";
+			case 10: return "CLOSE_PARENTHESES";
 			case 11: return "OPEN_CURLY_BRACKET";
 			case 12: return "CLOSE_CURLY_BRACKET";		
 			case 13: return "HASHTAG";
