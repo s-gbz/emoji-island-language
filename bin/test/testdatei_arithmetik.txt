@@ -1,5 +1,0 @@
-summe <- 0 is :bar_chart:;
-:hourglass_flowing_sand:(i <- 100 is :bar_chart:; i :fast_forward: 5; i:heavy_minus_sign::heavy_minus_sign:)
-{
-    summe <- summe :heavy_plus_sign: i;
-}
