@@ -1,6 +1,6 @@
 package parser;
 
-public class Operator extends Semantik{
+public class Operator extends Semantic{
 	//-------------------------------------------------------------------------
 	// operator -> (expression) 
 	// operator.f = expression.f

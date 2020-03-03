@@ -1,6 +1,6 @@
 package parser;
 
-public class Num extends Semantik{
+public class Num extends Semantic{
 	
 	//-------------------------------------------------------------------------
 	// Berechnet die nächst größere 10er Potenz von v

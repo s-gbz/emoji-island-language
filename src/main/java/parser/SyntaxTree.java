@@ -29,10 +29,12 @@ private byte token;
 // DIGIT oder MATH_SIGN.
 private char character;
 
+private String lexem;
+
 
 // value enthält die semantsiche Funktion des Teilbaums
 // mit Wurzelknoten this
-public Semantik value;
+public Semantic value;
 
 	
 //-------------------------------------------------------------------------
@@ -43,6 +45,7 @@ public Semantik value;
 SyntaxTree(byte t){
 	this.childNodes= new LinkedList<SyntaxTree>();
 	character=0;
+	lexem = "";
 	setToken(t);
 	setSemantikFunction(t);
 	}	
@@ -72,6 +75,17 @@ char getCharacter(){
 	return this.character;
 }
 
+//Bei einem Knoten, der ein Eingabewort repräsentiert (INPUT_SIGN)
+//wird mit dieser Methode das Wort im Knoten gespeichert
+void setLexem(String lexem){
+	this.lexem=lexem;
+}
+
+//Gibt das zum Knoten gehörende Wort zurück
+String getLexem(){
+	return this.lexem;
+}
+
 
 // Gibt den Syntaxbaum mit entsprechenden Einrückungen auf der Konsole
 // aus.
@@ -79,8 +93,8 @@ void printSyntaxTree(int t){
 	for(int i=0;i<t;i++)
 	  System.out.print("  ");
 	System.out.print(this.getTokenString());  		
-	if(this.character!=0)
-		System.out.println(":"+this.getCharacter());
+	if(this.lexem.length()!=0)
+		System.out.println(":"+this.getLexem());
 	else
 		System.out.println("");	
 	for(int i=0;i<this.childNodes.size();i++){
@@ -189,7 +203,7 @@ void setSemantikFunction(byte b){
 				break;/*
 		case 7: value=new Digit();
 				break; */
-	default: value=new Semantik();
+	default: value=new Semantic();
 			 break;
 	}
 }

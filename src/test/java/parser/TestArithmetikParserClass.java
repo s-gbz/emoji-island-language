@@ -24,7 +24,7 @@ public class TestArithmetikParserClass implements TokenList{
 			// lexikalische Analyse durchführen
 			if (parser.lexicalAnalysis())
 				//Aufruf des Parsers und Test, ob gesamte Eingabe gelesen
-				if (parser.program(parseTree)&& parser.inputEmpty()){
+				if (parser.checkGrammarRuleProgram(parseTree)&& parser.inputEmpty()){
 					//Ausgabe des Syntaxbaumes und des sematischen Wertes
 					parseTree.printSyntaxTree(0);
 					/*

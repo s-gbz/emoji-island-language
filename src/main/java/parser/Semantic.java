@@ -14,7 +14,7 @@ package parser;
  * Die Konkrete Semantik der einzelnen Grammatikregeln sind als Subklassen der
  * Klasse Semantik durch ??berschreiben der Methode f(t,n) zu realisieren.
  */
-public class Semantik {
+public class Semantic {
 
 	/**
 	 * Konstante, die angibt, dass die Semantische Funktion eines Knotens
@@ -38,6 +38,7 @@ public class Semantik {
 	 * Funktion undefiniert
 	 */
 	int f(SyntaxTree t, int n) {
+		System.out.println("HI: "+ n);
 		return UNDEFINED;
 	}
 }
