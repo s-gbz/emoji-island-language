@@ -45,7 +45,7 @@ public class NumScanner extends Scanner{
 		/*CHAR*/		{{}, 	{},																											{},		{},		{},		{},		{},		{},																												{},											{},		{},		{},		{},		{},		{},		{},		{},		{'\''},		{}}};
 		//				-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 		// Zust�nde zum DEA 
-		byte states[]={START, IDENT, UNDERSCORE, LESS_THAN, ASSIGMENT_SIGN, FIRST_COLON, EMOJI, EMOJI_CHARACTER, NUM, SEMICOLON, HASHTAG, DOUBLE_QUOTES, OPEN_PARENTHESES, CLOSE_PARENTHESES, OPEN_CURLY_BRACKET, CLOSE_CURLY_BRACKET, START_SINGLEQOUTE, END_SINGLEQOUTE, CHAR_SIGN};
+		byte states[]={START, IDENT, UNDERSCORE, LESS_THAN, ASSIGNMENT_SIGN, FIRST_COLON, EMOJI, EMOJI_CHARACTER, NUM, SEMICOLON, HASHTAG, DOUBLE_QUOTES, OPEN_PARENTHESES, CLOSE_PARENTHESES, OPEN_CURLY_BRACKET, CLOSE_CURLY_BRACKET, START_SINGLEQOUTE, END_SINGLEQOUTE, CHAR_SIGN};
 		// Instanz des DEA anlegen
 		this.dea=new DEA(transitions, states);
 	}
@@ -56,7 +56,7 @@ public class NumScanner extends Scanner{
 		switch(token){
 			case  1: return "NUMBER";
 			case  2: return "DIGIT";
-			case  3: return "ASSIGMENT";
+			case  3: return "ASSIGNMENT";
 			case  4: return "EPSILON";
 			case  5: return "START";
 			case  6: return "NOT_FINALE";
@@ -118,7 +118,7 @@ public class NumScanner extends Scanner{
 			case 62: return "EMOJI_MULT";
 			case 63: return "EMOJI_DIV";
 			case 64: return "FOR_ASSIGMENT";
-			case 65: return "ASSIGMENT_SIGN";
+			case 65: return "ASSIGNMENT_SIGN";
 			case 66: return "WHILE";
 			case 67: return "START_SINGLEQOUTE";
 			case 68: return "END_SINGLEQOUTE";

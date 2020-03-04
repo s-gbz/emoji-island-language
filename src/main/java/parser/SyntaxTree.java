@@ -12,9 +12,31 @@ mit den Methoden zum Aufbau des Baums.
 
 import java.util.*;
 
+import codegeneration.Assignment;
+import codegeneration.CompareOperator;
+import codegeneration.Digit;
+import codegeneration.Else;
+import codegeneration.Expression;
+import codegeneration.For;
+import codegeneration.ForAssignment;
+import codegeneration.ForStatement;
+import codegeneration.If;
+import codegeneration.Instruction;
+import codegeneration.Logical;
+import codegeneration.LogicalOperator;
+import codegeneration.Num;
+import codegeneration.Operator;
+import codegeneration.Program;
+import codegeneration.RightExpression;
+import codegeneration.RightTerm;
+import codegeneration.Semantic;
+import codegeneration.Sequence;
+import codegeneration.Statement;
+import codegeneration.Term;
+import codegeneration.While;
 import scanner.TokenList;
 
-class SyntaxTree implements TokenList{
+public class SyntaxTree implements TokenList{
 // Attribute 
 
 // linker bzw. rechter Teilbaum (null bei Blättern), rightNode=null,
@@ -60,7 +82,7 @@ void setToken(byte t){
 	}
 
 // Gibt den aktuellen Konten des Syntaxbaumes zurück
-byte getToken(){
+public byte getToken(){
 	return this.token;
 }
 
@@ -71,7 +93,7 @@ void setCharacter(char character){
 }
 
 // Gibt das zum Knoten gehörende Eingabezeichen zurück
-char getCharacter(){
+public char getCharacter(){
 	return this.character;
 }
 
@@ -82,7 +104,7 @@ void setLexem(String lexem){
 }
 
 //Gibt das zum Knoten gehörende Wort zurück
-String getLexem(){
+public String getLexem(){
 	return this.lexem;
 }
 
@@ -103,11 +125,11 @@ void printSyntaxTree(int t){
 }
 
 // Gibt den zum Zahlenwert passenden String des Tokentyps zurück
-String getTokenString(){
+public String getTokenString(){
 	switch(this.token){
 		case  1: return "NUMBER";
 		case  2: return "DIGIT";
-		case  3: return "ASSIGMENT";
+		case  3: return "ASSIGNMENT";
 		case  4: return "EPSILON";
 		case  5: return "START";
 		case  6: return "NOT_FINALE";
@@ -136,16 +158,16 @@ String getTokenString(){
 		case 29: return "PLUS";
 		case 30: return "MULT";
 		case 31: return "DIV";
-		case 32: return "VARIABLE_ASSIGMENT_I";
-		case 33: return "VARIABLE_ASSIGMENT";
+		case 32: return "VARIABLE_ASSIGNMENT_I";
+		case 33: return "VARIABLE_ASSIGNMENT";
 		case 34: return "EMOJI_INT";
 		case 35: return "EMOJI_START_CODE";
 		case 36: return "EMOJI_END_CODE";
 		case 37: return "SEQUENCE";
 		case 38: return "INSTRUCTION";
 		case 39: return "VARIABLEDEFINITION";
-		case 40: return "VARIABLEDEFINITIONWITHASSIGMENT";
-		case 41: return "VARIABLEDEFINITIONWITHOUTASSIGMENT";
+		case 40: return "VARIABLEDEFINITIONWITHASSIGNMENT";
+		case 41: return "VARIABLEDEFINITIONWITHOUTASSIGNMENT";
 		case 42: return "EMOJI_DATA_TYPE";
 		case 43: return "EMOJI_WHILE";
 		case 44: return "STATEMENT";
@@ -168,8 +190,8 @@ String getTokenString(){
 		case 61: return "EMOJI_MINUS";
 		case 62: return "EMOJI_MULT";
 		case 63: return "EMOJI_DIV";
-		case 64: return "FOR_ASSIGMENT";
-		case 65: return "ASSIGMENT_SIGN";
+		case 64: return "FOR_ASSIGNMENT";
+		case 65: return "ASSIGNMENT_SIGN";
 		case 66: return "WHILE";
 		case 67: return "START_SINGLEQOUTE";
 		case 68: return "END_SINGLEQOUTE";
@@ -189,22 +211,51 @@ String getTokenString(){
 // Abhängigkeit vom Knotentyp
 void setSemantikFunction(byte b){
 	switch(b){
-		case 1: value=new Expression();
-				break;
-		case 2: value=new RightExpression();
-				break;
-		case 3: value=new Term();
-				break;
-		case 4: value=new RightTerm();
-				break;
-		case 5: value=new Num();
-				break;
-		case 6: value=new Operator();
-				break;/*
-		case 7: value=new Digit();
-				break; */
+		case 1: value=new Num();
+			break;
+		case 2: value=new Digit();
+			break; 
+		case 3: value=new Assignment();
+			break; 
+		case 15: value=new Expression();
+			break;
+		case 16: value=new RightExpression();
+			break;
+		case 17: value=new Term();
+			break;
+		case 18: value=new RightTerm();
+			break;		
+		case 20: value=new Operator();
+			break;
+		case 21: value=new Program();
+			break;
+		case 37: value=new Sequence();
+			break;
+		case 38: value=new Instruction();
+			break;
+		case 44: value=new Statement();
+			break;
+		case 47: value=new ForStatement();
+			break;
+		case 55: value=new CompareOperator();
+			break;
+		case 56: value=new LogicalOperator();
+			break;
+		case 57: value=new Logical();
+			break;
+		case 64: value=new ForAssignment();
+			break;
+		case 66: value=new While();
+			break;
+		case 71: value=new If();
+			break;
+		case 72: value=new Else();
+			break;
+		case 73: value=new For();
+			break;
+		
 	default: value=new Semantic();
-			 break;
+			break;
 	}
 }
 
@@ -221,7 +272,7 @@ SyntaxTree insertSubtree(byte b){
 
 // Gibt die Refernz der Wurzel des i-ten Kindes des aktuellen 
 // Knotens zurück
-SyntaxTree getChild(int i){
+public SyntaxTree getChild(int i){
 	if (i>this.childNodes.size())
 		return null;
 	else
@@ -234,7 +285,7 @@ LinkedList getChildNodes(){
 	}	
 
 // Gibt die Zahl der Kinder des aktuellen Konotens zurück
-int getChildNumber(){
+public int getChildNumber(){
 	return childNodes.size();
 }
 

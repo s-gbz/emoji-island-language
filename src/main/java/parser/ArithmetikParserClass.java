@@ -12,23 +12,23 @@ import scanner.*;
 	
 	program -> emojiStartCode sequence emojiEndCode
 	sequence -> '{' instruction '}'
-	instruction -> assigment instruction
+	instruction -> assignment instruction
 	instruction -> while instruction
 	instruction -> if instruction
 	instruction -> for instruction
 	instruction -> epsilon
-	assigment -> ident '<-' expression ';'
-	assigment -> ident '<-' expression 'is' EmojiDatatype ';' 
-	assigment -> ident '<-' END_SINGLEQOUTE 'is' 'EMOJI_CHAR' ';'
-	forAssigment -> ident '<-' expression
-	forAssigment -> ident '<-' expression 'is' EmojiDatatype
+	assignment -> ident '<-' expression ';'
+	assignment -> ident '<-' expression 'is' EmojiDatatype ';' 
+	assignment -> ident '<-' END_SINGLEQOUTE 'is' 'EMOJI_CHAR' ';'
+	forassignment -> ident '<-' expression
+	forassignment -> ident '<-' expression 'is' EmojiDatatype
 	while -> emojiWhile openpar statement closepar sequence
 	if -> emojiIf openpar statement closepar sequence else
 	else -> emojiElse sequence 
 	else -> epsilon
 	for -> emojiFor openpar forStatement closepar sequence
 	statement -> expression compareOperator expression logical
-	forStatement -> forAssigment ';' statement ';' forAssigment
+	forStatement -> forassignment ';' statement ';' forassignment
 	logical -> logicalOperator statement 
 	logical -> epsilon
 	compareOperator -> emojiUnequal 
@@ -177,7 +177,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 	
 	
 	//-------------------------------------------------------------------------
-	// instruction ->   assigment instruction | 
+	// instruction ->   assignment instruction | 
 	//					while instruction | 
 	//					if instruction | 
 	//					for instruction | 
@@ -191,13 +191,13 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 		byte [] emojiForSet = {EMOJI_FOR};
 		
 		if(matchDoesNotMoveinputPointer(identSet,sT)) {
-			return checkGrammarRuleAssigment(sT.insertSubtree(ASSIGMENT)) && checkGrammarRuleInstruction(sT.insertSubtree(INSTRUCTION));
+			return checkGrammarRuleassignment(sT.insertSubtree(ASSIGNMENT)) && checkGrammarRuleInstruction(sT.insertSubtree(INSTRUCTION));
 		}else if(matchDoesNotMoveinputPointer(emojiWhileSet,sT)) {
 			return checkGrammarRuleWhile(sT.insertSubtree(WHILE)) && checkGrammarRuleInstruction(sT.insertSubtree(INSTRUCTION));
 		}else if(matchDoesNotMoveinputPointer(emojiIfSet,sT)) {
 			return checkGrammarRuleIf(sT.insertSubtree(IF)) && checkGrammarRuleInstruction(sT.insertSubtree(INSTRUCTION));
 		}else if(matchDoesNotMoveinputPointer(emojiForSet,sT)) {
-			return forBody(sT.insertSubtree(FOR)) && checkGrammarRuleInstruction(sT.insertSubtree(INSTRUCTION));
+			return checkGrammarRuleFor(sT.insertSubtree(FOR)) && checkGrammarRuleInstruction(sT.insertSubtree(INSTRUCTION));
 		}else{
   			SyntaxTree epsilonTree = sT.insertSubtree(EPSILON);
   			return true;
@@ -207,23 +207,24 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 	
 	
 	//-------------------------------------------------------------------------
-	// assigment ->  ident '<-' expression ';' ||
-	// assigment ->  ident '<-' expression 'is' EmojiDatatype ';' ||
-	// assigment ->  ident '<-' END_SINGLEQOUTE 'is' 'EMOJI_CHAR' ';'
+	// assignment ->  ident '<-' expression ';' ||
+	// assignment ->  ident '<-' expression 'is' 'EMOJI_INT' ';' ||
+	// assignment ->  ident '<-' END_SINGLEQOUTE 'is' 'EMOJI_CHAR' ';'
 	// Der Parameter sT ist die Wurzel des bis hier geparsten Syntaxbaumes
 	//-------------------------------------------------------------------------
-	boolean checkGrammarRuleAssigment(SyntaxTree sT){
-		byte [] assigmentSet = {ASSIGMENT_SIGN};
-		byte [] variableAssigmentSet = {VARIABLE_ASSIGMENT};
+	boolean checkGrammarRuleassignment(SyntaxTree sT){
+		byte [] assignmentSet = {ASSIGNMENT_SIGN};
+		byte [] variableassignmentSet = {VARIABLE_ASSIGNMENT};
 		byte [] identSet = {IDENT};
 		byte [] semicolonSet = {SEMICOLON};
 		byte [] emojiCharacterSet = {EMOJI_CHARACTER};
+		byte [] emojiIntSet = {EMOJI_INT};
 		byte [] charSet = {END_SINGLEQOUTE}; //Example: 'a'
 		
 		if (match(identSet,sT)) {
-			if (match(assigmentSet,sT)) {
+			if (match(assignmentSet,sT)) {
 				if(match(charSet,sT)) {
-		 			if(match(variableAssigmentSet,sT)){
+		 			if(match(variableassignmentSet,sT)){
 		 				if(match(emojiCharacterSet,sT)) {
 							if(match(semicolonSet,sT)) {
 								return true;
@@ -232,7 +233,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 								return false;
 				 			}
 						}else {
-			 				syntaxError("Emoji_data_type erwartet"); 			
+			 				syntaxError("Emoji_Char erwartet"); 			
 							return false;
 			 			}
 		 			}else {
@@ -242,8 +243,8 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 				} else if(checkGrammarRuleExpression(sT.insertSubtree(EXPRESSION))) {
 		 			if(match(semicolonSet,sT)) {
 		 				return true;
-		 			}else if(match(variableAssigmentSet,sT)){
-		 				if(checkGrammarRuleEmojiDatatype(sT.insertSubtree(EMOJI_DATA_TYPE))) {
+		 			}else if(match(variableassignmentSet,sT)){
+		 				if(match(emojiIntSet,sT)) {
 							if(match(semicolonSet,sT)) {
 								return true;
 							}else {
@@ -251,7 +252,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 								return false;
 				 			}
 						}else {
-			 				syntaxError("Emoji_data_type erwartet"); 			
+			 				syntaxError("Emoji_Int erwartet"); 			
 							return false;
 			 			}
 		 			} else {
@@ -259,11 +260,11 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 						return false;
 		 			}
 		 		} else {
-	 				syntaxError("Expression fehlerhaft"); 			
+	 				syntaxError("Expression fehlerhaft oder einfacher Anführungsstrich erwartet"); 			
 					return false;
 	 			}
 			}else{
-				syntaxError("Assigment erwartet"); 			
+				syntaxError("assignment erwartet"); 			
 				return false;
 			}
 		}else{
@@ -379,7 +380,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 	// for -> emojiFor openpar forStatement closepar sequence
 	// Der Parameter sT ist die Wurzel des bis hier geparsten Syntaxbaumes
 	//-------------------------------------------------------------------------
-	boolean forBody(SyntaxTree sT){
+	boolean checkGrammarRuleFor(SyntaxTree sT){
 		byte [] openParSet= {OPEN_PARENTHESES};
 		byte [] closeParSet= {CLOSE_PARENTHESES};
 		byte [] emojiForSet= {EMOJI_FOR};
@@ -424,20 +425,20 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 	}//statement
 	
 	//-------------------------------------------------------------------------
-	// forStatement -> forAssigment ';' statement ';' forAssigment
+	// forStatement -> forassignment ';' statement ';' forassignment
 	// Der Parameter sT ist die Wurzel des bis hier geparsten Syntaxbaumes
 	//-------------------------------------------------------------------------
 	boolean checkGrammarRuleForStatement(SyntaxTree sT){
 		byte [] semicolonSet = {SEMICOLON};
 		
-		if(checkGrammarRuleForAssigment(sT.insertSubtree(FOR_ASSIGMENT))) {
+		if(checkGrammarRuleForassignment(sT.insertSubtree(FOR_ASSIGNMENT))) {
 			if(match(semicolonSet,sT)) {
 				if(checkGrammarRuleStatement(sT.insertSubtree(STATEMENT))) {
 					if(match(semicolonSet,sT)) {
-						if(checkGrammarRuleForAssigment(sT.insertSubtree(FOR_ASSIGMENT))) {
+						if(checkGrammarRuleForassignment(sT.insertSubtree(FOR_ASSIGNMENT))) {
 							return true;
 						}else {
-							syntaxError("Fehler in ForAssigment"); 			
+							syntaxError("Fehler in Forassignment"); 			
 							return false;
 						}
 					}else {
@@ -453,30 +454,31 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 				return false;
 			}	
 		}else {
-			syntaxError("Fehler in ForAssigment"); 			
+			syntaxError("Fehler in Forassignment"); 			
 			return false;
 		}
 	}
 	
 	//-------------------------------------------------------------------------
-	// forAssigment ->  ident '<-' expression ||
-	// forAssigment ->  ident '<-' expression 'is' EmojiDatatype
+	// forassignment ->  ident '<-' expression ||
+	// forassignment ->  ident '<-' expression 'is' EMOJI_INT
 	// Der Parameter sT ist die Wurzel des bis hier geparsten Syntaxbaumes
 	//-------------------------------------------------------------------------
-	boolean checkGrammarRuleForAssigment(SyntaxTree sT){
-		byte [] assigmentSet = {ASSIGMENT_SIGN};
-		byte [] variableAssigmentSet = {VARIABLE_ASSIGMENT};
+	boolean checkGrammarRuleForassignment(SyntaxTree sT){
+		byte [] assignmentSet = {ASSIGNMENT_SIGN};
+		byte [] variableassignmentSet = {VARIABLE_ASSIGNMENT};
 		byte [] identSet = {IDENT};
+		byte [] emojiIntSet = {EMOJI_INT};
 		
    
 		if (match(identSet,sT)) {
-			if (match(assigmentSet,sT)) {
+			if (match(assignmentSet,sT)) {
 		 		if(checkGrammarRuleExpression(sT.insertSubtree(EXPRESSION))) {
-		 			if(match(variableAssigmentSet,sT)){
-		 				if(checkGrammarRuleEmojiDatatype(sT.insertSubtree(EMOJI_DATA_TYPE))) {
+		 			if(match(variableassignmentSet,sT)){
+		 				if(match(emojiIntSet,sT)) {
 		 						return true;
 						}else {
-			 				syntaxError("Emoji_data_type erwartet"); 			
+			 				syntaxError("Emoji_Int erwartet"); 			
 							return false;
 			 			}
 		 			}
@@ -486,7 +488,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 					return false;
 				}
 			}else{
-				syntaxError("Assigment erwartet"); 			
+				syntaxError("assignment erwartet"); 			
 				return false;
 			}
 		}else{
@@ -568,52 +570,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
  
 	}
 	
-	//-------------------------------------------------------------------------
-	// arithmeticOperator -> emojiPlus | emojiMinus | emojiMult | emojiDiv 
-	// Der Parameter sT ist die Wurzel des bis hier geparsten Syntaxbaumes
-	//-------------------------------------------------------------------------
-	boolean checkGrammarRuleArithmeticOperator(SyntaxTree sT){
-		byte [] emojiPlusSet = {EMOJI_PLUS};
-		byte [] emojiMinusSet = {EMOJI_MINUS};
-		byte [] emojiMultSet = {EMOJI_MULT};
-		byte [] emojiDivSet = {EMOJI_DIV};	
 		
-		if(match(emojiPlusSet,sT)) {
-			return true;
-		}else if(match(emojiMinusSet,sT)) {
-			return true;
-		}else if(match(emojiMultSet,sT)) {
-			return true;
-		}else if(match(emojiDivSet,sT)) {
-			return true;
-		}else {
-			syntaxError("arithmeticOperator erwartet"); 	
-			return false;
-		}
-	}
-	
-	
-	//-------------------------------------------------------------------------
-	// emojiDatatype -> EMOJI_INT | EMOJI_CHAR
-	// Der Parameter sT ist die Wurzel des bis hier geparsten Syntaxbaumes
-	//-------------------------------------------------------------------------
-	boolean checkGrammarRuleEmojiDatatype(SyntaxTree sT){
-		byte [] emojiIntSet = {EMOJI_INT};
-		byte [] emojiCharacterSet = {EMOJI_CHARACTER};
-		SyntaxTree epsilonTree;
-
-		if (match(emojiIntSet,sT)) {
-			return true;
-		}
-		else if(match(emojiCharacterSet,sT)){
-			return true;
-		}
-		else{
-
-  			return false;
-		}				
-	}
-	
 
 	//-------------------------------------------------------------------------
 	// expressionChar -> "'" Ident "'"

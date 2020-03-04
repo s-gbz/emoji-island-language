@@ -142,12 +142,11 @@ abstract class Scanner implements TokenList{
 	//-------------------------------------------------------------------------			
 	// Methode zum  Ausgaben des Attributes tokenStream
 	//-------------------------------------------------------------------------
-	void printTokenStream(){
+	public void printTokenStream(){
 		for(int i=0;i<tokenStream.size();i++) {
 			System.out.println(getTokenString(tokenStream.get(i).token)+": "+
 			tokenStream.get(i).lexem);	
-			System.out.println(tokenStream.get(i).token+": "+
-				tokenStream.get(i).lexem);	
+			//System.out.println(tokenStream.get(i).token+": "+ tokenStream.get(i).lexem);	
 		}
 	}
 
@@ -298,7 +297,7 @@ abstract class Scanner implements TokenList{
 				if(token==IDENT) {
 					System.out.println("token: " + getTokenString(token));
 					if(lexem.equals(new String("is"))) {
-						token=VARIABLE_ASSIGMENT;
+						token=VARIABLE_ASSIGNMENT;
 						System.out.println("token: " + getTokenString(token));
 
 					}
