@@ -10,6 +10,6 @@ public class For extends Semantic{
 	public int f(SyntaxTree t, int n){
 		System.out.println("CLASS FOR >> n: " + n);
 		SyntaxTree forStatement = t.getChild(2), sequence = t.getChild(4);
-		return sequence.value.f(sequence, forStatement.value.f(forStatement, UNDEFINED));		
+		return sequence.semanticFunction.f(sequence, forStatement.semanticFunction.f(forStatement, UNDEFINED));		
 	} 
 }

@@ -27,11 +27,11 @@ public class Num extends Semantic{
 		if (t.getChildNumber()==2){
 			SyntaxTree digit=t.getChild(0),
 					             num=t.getChild(1);
-			int v=num.value.f(num,UNDEFINED);
-			return digit.value.f(digit,UNDEFINED)*potenz(v)+v;
+			int v=num.semanticFunction.f(num,UNDEFINED);
+			return digit.semanticFunction.f(digit,UNDEFINED)*potenz(v)+v;
 		}else{
 			SyntaxTree digit=t.getChild(0);
-			return digit.value.f(digit,UNDEFINED);
+			return digit.semanticFunction.f(digit,UNDEFINED);
 		}
 	}//f 	
 }//Num

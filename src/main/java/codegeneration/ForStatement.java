@@ -10,6 +10,6 @@ public class ForStatement extends Semantic{
 	public int f(SyntaxTree t, int n){
 		System.out.println("CLASS STATEMENT >> n: " + n);
 		SyntaxTree forAssignmentFirst = t.getChild(0), statement = t.getChild(2), forAssignmentSecound = t.getChild(4);
-		return forAssignmentSecound.value.f(forAssignmentSecound, statement.value.f(statement, forAssignmentFirst.value.f(forAssignmentFirst, UNDEFINED)));
+		return forAssignmentSecound.semanticFunction.f(forAssignmentSecound, statement.semanticFunction.f(statement, forAssignmentFirst.semanticFunction.f(forAssignmentFirst, UNDEFINED)));
 	} 
 }

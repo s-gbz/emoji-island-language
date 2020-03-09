@@ -19,8 +19,8 @@ public class RightExpression extends Semantic{
 			SyntaxTree symbol=t.getChild(0), term=t.getChild(1), rightExpression=t.getChild(2);
 			
 			switch(symbol.getLexem()){
-				case ":heavy_plus_sign:" : 	return n+rightExpression.value.f(rightExpression,term.value.f(term,UNDEFINED));
-				case ":heavy_minus_sign:" :	return n-rightExpression.value.f(rightExpression,term.value.f(term,UNDEFINED));
+				case ":heavy_plus_sign:" : 	return n+rightExpression.semanticFunction.f(rightExpression,term.semanticFunction.f(term,UNDEFINED));
+				case ":heavy_minus_sign:" :	return n-rightExpression.semanticFunction.f(rightExpression,term.semanticFunction.f(term,UNDEFINED));
 			default: return UNDEFINED;
 			}
 		}else {

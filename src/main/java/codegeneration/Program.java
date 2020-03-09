@@ -7,7 +7,7 @@ public class Program extends Semantic{
 	// program.f=sequence.f
 	public int f(SyntaxTree t, int n){
 		SyntaxTree sequence=t.getChild(1);
-		return sequence.value.f(sequence,UNDEFINED);
+		return sequence.semanticFunction.f(sequence,UNDEFINED);
 	} 
 }
 

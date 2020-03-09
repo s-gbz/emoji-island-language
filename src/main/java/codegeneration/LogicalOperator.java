@@ -12,6 +12,7 @@ public class LogicalOperator extends Semantic{
 	//-------------------------------------------------------------------------
 	public int f(SyntaxTree t, int n){
 		System.out.println("CLASS LOGICALOPERATOR >> n: " + n);
-		return t.getToken();
+		//return t.getToken();
+		return UNDEFINED;
 	} 
 }

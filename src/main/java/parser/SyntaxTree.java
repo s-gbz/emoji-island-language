@@ -56,7 +56,7 @@ private String lexem;
 
 // value enthält die semantsiche Funktion des Teilbaums
 // mit Wurzelknoten this
-public Semantic value;
+public Semantic semanticFunction;
 
 	
 //-------------------------------------------------------------------------
@@ -211,50 +211,50 @@ public String getTokenString(){
 // Abhängigkeit vom Knotentyp
 void setSemantikFunction(byte b){
 	switch(b){
-		case 1: value=new Num();
+		case 1: semanticFunction=new Num();
 			break;
-		case 2: value=new Digit();
+		case 2: semanticFunction=new Digit();
 			break; 
-		case 3: value=new Assignment();
+		case 3: semanticFunction=new Assignment();
 			break; 
-		case 15: value=new Expression();
+		case 15: semanticFunction=new Expression();
 			break;
-		case 16: value=new RightExpression();
+		case 16: semanticFunction=new RightExpression();
 			break;
-		case 17: value=new Term();
+		case 17: semanticFunction=new Term();
 			break;
-		case 18: value=new RightTerm();
+		case 18: semanticFunction=new RightTerm();
 			break;		
-		case 20: value=new Operator();
+		case 20: semanticFunction=new Operator();
 			break;
-		case 21: value=new Program();
+		case 21: semanticFunction=new Program();
 			break;
-		case 37: value=new Sequence();
+		case 37: semanticFunction=new Sequence();
 			break;
-		case 38: value=new Instruction();
+		case 38: semanticFunction=new Instruction();
 			break;
-		case 44: value=new Statement();
+		case 44: semanticFunction=new Statement();
 			break;
-		case 47: value=new ForStatement();
+		case 47: semanticFunction=new ForStatement();
 			break;
-		case 55: value=new CompareOperator();
+		case 55: semanticFunction=new CompareOperator();
 			break;
-		case 56: value=new LogicalOperator();
+		case 56: semanticFunction=new LogicalOperator();
 			break;
-		case 57: value=new Logical();
+		case 57: semanticFunction=new Logical();
 			break;
-		case 64: value=new ForAssignment();
+		case 64: semanticFunction=new ForAssignment();
 			break;
-		case 66: value=new While();
+		case 66: semanticFunction=new While();
 			break;
-		case 71: value=new If();
+		case 71: semanticFunction=new If();
 			break;
-		case 72: value=new Else();
+		case 72: semanticFunction=new Else();
 			break;
-		case 73: value=new For();
+		case 73: semanticFunction=new For();
 			break;
 		
-	default: value=new Semantic();
+	default: semanticFunction=new Semantic();
 			break;
 	}
 }

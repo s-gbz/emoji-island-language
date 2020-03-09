@@ -25,7 +25,7 @@ public class Instruction extends Semantic{
 		if(t.getChildNumber()==2) {
 			//instruction.value sagt um welcher instruction = {assigment, while, of, for} es sich handelt
 			SyntaxTree assigmentORwhileORifORfor=t.getChild(0), instruction=t.getChild(1);
-			return instruction.value.f(instruction,assigmentORwhileORifORfor.value.f(assigmentORwhileORifORfor, UNDEFINED));
+			return instruction.semanticFunction.f(instruction,assigmentORwhileORifORfor.semanticFunction.f(assigmentORwhileORifORfor, UNDEFINED));
 		}else {
 			return n;
 		}

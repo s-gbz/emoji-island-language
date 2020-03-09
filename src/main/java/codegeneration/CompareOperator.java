@@ -25,6 +25,7 @@ public class CompareOperator extends Semantic{
 	//-------------------------------------------------------------------------
 	public int f(SyntaxTree t, int n){
 		System.out.println("CLASS COMPAREOPERATOR >> n: " + n);
-		return t.getToken();
+		//return t.getToken();
+		return UNDEFINED;
 	} 
 }

@@ -29,7 +29,7 @@ public class TestArithmetikParserClass implements TokenList{
 					parseTree.printSyntaxTree(0);
 					//parser.printTokenStream();
 				
-					System.out.println("Korrekter Ausdruck mit Wert:" +parseTree.value.f(parseTree,PROGRAM));
+					System.out.println("Korrekter Ausdruck mit Wert:" +parseTree.semanticFunction.f(parseTree,PROGRAM));
 
 				}else
 					//Fehlermeldung, falls Ausdruck nicht zu parsen war

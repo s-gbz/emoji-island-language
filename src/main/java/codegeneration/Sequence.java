@@ -8,6 +8,6 @@ public class Sequence extends Semantic{
 	public int f(SyntaxTree t, int n){
 		System.out.println("CLASS SEQUENCE >> >> n: " + n);
 		SyntaxTree instruction=t.getChild(1);
-		return instruction.value.f(instruction,UNDEFINED);
+		return instruction.semanticFunction.f(instruction,UNDEFINED);
 	} 
 }

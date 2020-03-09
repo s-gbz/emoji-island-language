@@ -13,10 +13,10 @@ public class If extends Semantic{
 		System.out.println("CLASS IF >> n: " + n);
 		if(t.getChildNumber()==5) {
 			SyntaxTree statement = t.getChild(2), sequence = t.getChild(4);
-			return sequence.value.f(sequence, statement.value.f(statement, UNDEFINED));
+			return sequence.semanticFunction.f(sequence, statement.semanticFunction.f(statement, UNDEFINED));
 		}else {
 			SyntaxTree statement = t.getChild(2), sequence = t.getChild(4), elseTree = t.getChild(5);
-			return elseTree.value.f(elseTree, sequence.value.f(sequence, statement.value.f(statement, UNDEFINED)));
+			return elseTree.semanticFunction.f(elseTree, sequence.semanticFunction.f(sequence, statement.semanticFunction.f(statement, UNDEFINED)));
 		}
 		
 	} 

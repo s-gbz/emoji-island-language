@@ -11,6 +11,6 @@ public class While extends Semantic{
 	public int f(SyntaxTree t, int n){
 		System.out.println("CLASS WHILE >>  n: " + n);
 		SyntaxTree statement = t.getChild(2), sequence = t.getChild(4);
-		return sequence.value.f(sequence, statement.value.f(statement, UNDEFINED));
+		return sequence.semanticFunction.f(sequence, statement.semanticFunction.f(statement, UNDEFINED));
 	} 
 }
