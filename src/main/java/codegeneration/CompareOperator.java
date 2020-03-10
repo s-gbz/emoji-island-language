@@ -2,6 +2,9 @@ package codegeneration;
 
 import parser.SyntaxTree;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 public class CompareOperator extends Semantic{
 	//-------------------------------------------------------------------------
 	// compareOperator -> 	emojiUnequal  
@@ -23,7 +26,7 @@ public class CompareOperator extends Semantic{
 	// compareOperator.f=emojiGreaterthenEquals
 
 	//-------------------------------------------------------------------------
-	public int f(SyntaxTree t, int n){
+	public int f(SyntaxTree t, int n, BufferedWriter bufferedWriter) throws IOException {
 		System.out.println("CLASS COMPAREOPERATOR >> n: " + n);
 		//return t.getToken();
 		return UNDEFINED;

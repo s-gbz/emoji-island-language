@@ -2,6 +2,9 @@ package codegeneration;
 
 import parser.SyntaxTree;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 /**
  * Diese Klasse stellt den Rumpf der semantsichen Funktion eines Knotens im
  * Syntaxbaum f??r die Grammatik unseres Parsers zur Verf??gung.
@@ -39,7 +42,7 @@ public class Semantic {
 	 * Im allgemeinen Fall, d.h. ohne Angabe einer Regel, ist die semantische
 	 * Funktion undefiniert
 	 */
-	public int f(SyntaxTree t, int n) {
+	public int f(SyntaxTree t, int n, BufferedWriter bufferedWriter) throws IOException {
 		System.out.println("SEMANTIC >> N: "+ n);
 		return UNDEFINED;
 	}

@@ -2,11 +2,14 @@ package codegeneration;
 
 import parser.SyntaxTree;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 public class Num extends Semantic{
 	
 	//-------------------------------------------------------------------------
-	// Berechnet die nächst größere 10er Potenz von v
-	// Hilfsmethode für num.f
+	// Berechnet die nï¿½chst grï¿½ï¿½ere 10er Potenz von v
+	// Hilfsmethode fï¿½r num.f
 	//-------------------------------------------------------------------------
 	private int potenz(int v){
 		int p=10;
@@ -23,15 +26,15 @@ public class Num extends Semantic{
 	// num -> digit
 	// num.f=digit.f
 	//-------------------------------------------------------------------------
-	public int f(SyntaxTree t, int n){
+	public int f(SyntaxTree t, int n, BufferedWriter bufferedWriter) throws IOException {
 		if (t.getChildNumber()==2){
 			SyntaxTree digit=t.getChild(0),
 					             num=t.getChild(1);
-			int v=num.semanticFunction.f(num,UNDEFINED);
-			return digit.semanticFunction.f(digit,UNDEFINED)*potenz(v)+v;
+			int v=num.semanticFunction.f(num, UNDEFINED, bufferedWriter);
+			return digit.semanticFunction.f(digit, UNDEFINED, bufferedWriter)*potenz(v)+v;
 		}else{
 			SyntaxTree digit=t.getChild(0);
-			return digit.semanticFunction.f(digit,UNDEFINED);
+			return digit.semanticFunction.f(digit, UNDEFINED, bufferedWriter);
 		}
 	}//f 	
 }//Num

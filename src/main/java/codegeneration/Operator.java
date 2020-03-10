@@ -2,6 +2,9 @@ package codegeneration;
 
 import parser.SyntaxTree;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 public class Operator extends Semantic{
 	//-------------------------------------------------------------------------
 	// operator -> (expression) 
@@ -10,11 +13,11 @@ public class Operator extends Semantic{
 	// operator -> num 
 	// operator.f = num.f
 	//-------------------------------------------------------------------------
-	public int f(SyntaxTree t, int n){
+	public int f(SyntaxTree t, int n, BufferedWriter bufferedWriter) throws IOException {
 		System.out.println("CLASS Operator >>  n: " + n);
 		if (t.getChildNumber()==3){
 			SyntaxTree expression=t.getChild(1);
-			return expression.semanticFunction.f(expression,UNDEFINED);
+			return expression.semanticFunction.f(expression,UNDEFINED, bufferedWriter);
 		}else{
 			SyntaxTree num=t.getChild(0);
 			

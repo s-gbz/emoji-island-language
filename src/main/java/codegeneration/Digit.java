@@ -2,6 +2,9 @@ package codegeneration;
 
 import parser.SyntaxTree;
 
+import java.io.BufferedWriter;
+import java.io.IOException;
+
 public class Digit extends Semantic{
 	//-------------------------------------------------------------------------
 	// digit -> '1' | '2' | '3' | '4' | '5' |'6' | '7' | '8' | '9' | '0'
@@ -10,7 +13,7 @@ public class Digit extends Semantic{
 	// digit.f = 9; falls charcter=='9'
 	// digit.f = 0; falls charcter=='0'
 	//-------------------------------------------------------------------------
-	public int f(SyntaxTree t, int n){
+	public int f(SyntaxTree t, int n, BufferedWriter bufferedWriter) throws IOException {
 		SyntaxTree symbol=t.getChild(0);
 		switch(symbol.getCharacter()){
 			case '0' : return 0;
