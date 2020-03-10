@@ -59,10 +59,10 @@ abstract class Scanner implements TokenList{
 	// Lokalisierung der Syntaxfehler durch den Parser
 	//-------------------------------------------------------------------------		
 
-	class Token{
-		byte token;
-		String lexem;
-		int line;
+	public class Token{
+		public byte token;
+		public String lexem;
+		public int line;
 		
 		// Konstruktor
 		Token(byte token, int line, String lexem){
@@ -93,7 +93,7 @@ abstract class Scanner implements TokenList{
 	private String lexem;
 
 	// Liste der durch den Scanner erkannten Token aus der Eingabe
-	LinkedList <Token> tokenStream;
+	protected LinkedList <Token> tokenStream;
 	
 	// Instanz des deterministischen endlichen Automaten (DEA) 
 	DEA dea;  
@@ -142,10 +142,12 @@ abstract class Scanner implements TokenList{
 	//-------------------------------------------------------------------------			
 	// Methode zum  Ausgaben des Attributes tokenStream
 	//-------------------------------------------------------------------------
-	void printTokenStream(){
-		for(int i=0;i<tokenStream.size();i++)
+	public void printTokenStream(){
+		for(int i=0;i<tokenStream.size();i++) {
 			System.out.println(getTokenString(tokenStream.get(i).token)+": "+
-			tokenStream.get(i).lexem);			
+			tokenStream.get(i).lexem);	
+			//System.out.println(tokenStream.get(i).token+": "+ tokenStream.get(i).lexem);	
+		}
 	}
 
 
@@ -164,7 +166,7 @@ abstract class Scanner implements TokenList{
 	// einer Eingabedatei mit dem übergebenen Namen.
 	// Das Ende der Eingabe wird mit EOF markiert
 	//-------------------------------------------------------------------------		
-	boolean readInputEmoji(String name){
+	public boolean readInputEmoji(String name){
 		int c=0;
 		int l=1;
 		inputStream=new LinkedList <InputCharacter> ();
@@ -192,8 +194,10 @@ abstract class Scanner implements TokenList{
 					}else if (((char)c)=='\n'){
 						// carriage return überlesen und Zeilennummer hochzählen
 						l++;
-					}else if (c==13){
+					}else if (((char)c)=='\r'){
 						// linefeed überlesen
+					}else if (((char)c)=='\t'){
+						// tabulator überlesen
 					}else{
 						// Zeichen einlesen
 						inputStream.addLast(new InputCharacter((char)c, l));
@@ -224,7 +228,7 @@ abstract class Scanner implements TokenList{
 	// einer Eingabedatei mit dem übergebenen Namen.
 	// Das Ende der Eingabe wird mit EOF markiert
 	//-------------------------------------------------------------------------		
-	boolean readInput(String name){
+	public boolean readInput(String name){
 		int c=0;
 		int l=1;
 		inputStream=new LinkedList <InputCharacter> ();
@@ -242,18 +246,24 @@ abstract class Scanner implements TokenList{
 				}else if (((char)c)=='\n'){
 					// carriage return überlesen und Zeilennummer hochzählen
 					l++;
-				}else if (c==13){
+				}else if (((char)c)=='\r'){
 					// linefeed überlesen
+				}else if (((char)c)=='\t'){
+					// tabulator überlesen
 				}else{
 					// Zeichen einlesen
 					inputStream.addLast(new InputCharacter((char)c, l));
 				}
 			}
+			
+
 		}
 		catch(Exception e){
 			System.out.println("Fehler beim Dateizugriff: "+name);
 			return false;
 		}
+		//if(lexicalAnalysis())
+			//printTokenStream();
 		
 		System.out.println(inputStream.size());
 		return true;	
@@ -267,7 +277,7 @@ abstract class Scanner implements TokenList{
 	// Führt die lexikalische Analyse für den nächsten Token durch und gibt
 	// diesen zurück
 	//-------------------------------------------------------------------------
-	boolean lexicalAnalysis(){
+	public boolean lexicalAnalysis(){
 		char [] EOFSet={EOF};
 		byte token=NO_TYPE;
 		// Eingabe Token für Token prüfen und gefundene Token in tokenStream
@@ -277,12 +287,30 @@ abstract class Scanner implements TokenList{
 			System.out.println(getTokenString(token));
 			// falls kein gültiges Token gefunden wurde, lexikalische Analyse
 			// abbrechen
-			if (token==NO_TYPE)
+			if (token==NO_TYPE) {
 				return false;
+			}
 			// sonst Token in tokenStream eintragen
-			else
-				tokenStream.
-				addLast(new Token(token,inputStream.get(pointer-1).line,lexem));
+			else {
+				System.out.println("LEXEM: " + lexem);
+				System.out.println("token: " + getTokenString(token));
+				if(token==IDENT) {
+					System.out.println("token: " + getTokenString(token));
+					if(lexem.equals(new String("is"))) {
+						token=VARIABLE_ASSIGNMENT;
+						System.out.println("token: " + getTokenString(token));
+
+					}
+				}else if(token==EMOJI) { //SECOND_COLON
+					token = parseEmoji(lexem);
+					if(token==EMOJI_PLUS || token==EMOJI_MINUS || token == EMOJI_MULT || token == EMOJI_DIV) {
+						token = parseArithmeticEmoji(token);
+					}
+				}
+				System.out.println("token: " + getTokenString(token));
+				System.out.println("LEXEM: " + lexem);
+				tokenStream.addLast(new Token(token,inputStream.get(pointer-1).line,lexem));
+			}
 		}//while
 		// Bei erfolgreichem Scannen, Token Strom mit EOF abschließen
 		tokenStream.addLast(new Token((byte)EOF,inputStream.get(pointer-1).line,"EOF"));
@@ -326,5 +354,68 @@ abstract class Scanner implements TokenList{
 				return NO_TYPE;
 			}
 		}//getNextToken
+	
+	
+	byte parseEmoji(String lexem) {
+		switch(lexem) {
+		case ":triangular_flag_on_post:":
+			return EMOJI_START_CODE;
+		case ":checkered_flag:":
+			return EMOJI_END_CODE;
+		case ":bar_chart:":
+			return EMOJI_INT;
+		case ":alarm_clock:":
+			return EMOJI_WHILE;
+		case ":white_check_mark:":
+			return EMOJI_IF;
+		case ":hourglass_flowing_sand:":
+			return EMOJI_FOR;
+		case ":x:":
+			return EMOJI_ELSE;
+		case ":crossed_swords:":
+			return EMOJI_UNEQUAL;
+		case ":rainbow_flag:":
+			return EMOJI_EQUAL;
+		case ":rewind:":
+			return EMOJI_LESS_THAN;
+		case ":fast_forward:":
+			return EMOJI_GREATER_THAN;
+		case ":black_left_pointing_double_triangle_with_vertical_bar:":
+			return EMOJI_LESS_THAN_EQUALS;
+		case ":black_right_pointing_double_triangle_with_vertical_bar:":
+			return EMOJI_GREATER_THAN_EQUALS;
+		case ":link:":
+			return EMOJI_LOGICAL_AND;
+		case ":grey_question:":
+			return EMOJI_LOGICAL_OR;
+		case ":heavy_plus_sign:":
+			return EMOJI_PLUS;
+		case ":heavy_minus_sign:":
+			return EMOJI_MINUS;
+		case ":heavy_multiplication_x:":
+			return EMOJI_MULT;
+		case ":heavy_division_sign:":
+			return EMOJI_DIV;
+		case ":memo:":
+			return EMOJI_CHARACTER;
+		default:
+			return NO_TYPE;
+		}
+	}
+	
+	byte parseArithmeticEmoji(byte token) {
+		switch(token) {
+		case EMOJI_PLUS:
+			return PLUS;
+		case EMOJI_MINUS:
+			return MINUS;
+		case EMOJI_MULT:
+			return MULT;
+		case EMOJI_DIV:
+			return DIV;
+		default:
+			return NO_TYPE;
+		}
+	}
 
 }

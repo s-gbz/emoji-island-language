@@ -81,3 +81,4 @@ build/tmp/jar/MANIFEST.MF
 build/libs/emoji-island-language-1.0-SNAPSHOT.jar
 
 .settings/org.eclipse.buildship.core.prefs
+/bin/

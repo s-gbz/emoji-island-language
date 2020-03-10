@@ -11,13 +11,13 @@ package scanner;
 	zur Verf�gung.
 */
 
-interface TokenList {
+public interface TokenList {
 	// Konstanten zur Bezeichnung der Knoten des Syntaxbaumes
 	
 	final byte	NO_TYPE=0,
 				NUM=1,
 				DIGIT=2,
-				ASSIGMENT=3,
+				ASSIGNMENT=3,
 				EPSILON=4,
 				START=5,
 				NOT_FINAL=6,
@@ -40,8 +40,54 @@ interface TokenList {
 				LESS_THAN=24,
 				MINUS=25,
 				FIRST_COLON=26,
-				SECOND_COLON=27,
-				EMOJI_CHARAKTER=28;
+				EMOJI=27,
+				EMOJI_CHARACTER=28,
+				PLUS=29,
+				MULT=30,
+				DIV=31,
+				VARIABLE_ASSIGNMENT_I=32,
+				VARIABLE_ASSIGNMENT=33,
+				EMOJI_INT=34,
+				EMOJI_START_CODE=35,
+				EMOJI_END_CODE=36,
+				SEQUENCE=37,
+				INSTRUCTION=38,
+				VARIABLEDEFINITION=39,
+				VARIABLEDEFINITIONWITHASSIGNMENT=40,
+				VARIABLEDEFINITIONWITHOUTASSIGNMENT=41,
+				EMOJI_DATA_TYPE=42,
+				EMOJI_WHILE=43,
+				STATEMENT=44,
+				EMOJI_IF=45,
+				EMOJI_FOR=46,
+				FOR_STATEMENT=47,
+				EMOJI_ELSE=48,
+				EMOJI_UNEQUAL=49,
+				EMOJI_EQUAL=50,
+				EMOJI_LESS_THAN=51,
+				EMOJI_GREATER_THAN=52,
+				EMOJI_LESS_THAN_EQUALS=53,
+				EMOJI_GREATER_THAN_EQUALS=54,
+				COMPARE_OPERATOR=55,
+				LOGICAL_OPERATOR=56,
+				LOGICAL=57,
+				EMOJI_LOGICAL_AND=58,
+				EMOJI_LOGICAL_OR=59,
+				EMOJI_PLUS=60,
+				EMOJI_MINUS=61,
+				EMOJI_MULT=62,
+				EMOJI_DIV=63,
+				FOR_ASSIGNMENT=64,
+				ASSIGNMENT_SIGN=65,
+				WHILE=66,
+				START_SINGLEQOUTE=67,
+				END_SINGLEQOUTE=68,
+				CHAR_SIGN=69,
+				EXPRESSION_CHAR=70,
+				IF=71,
+				ELSE=72,
+				FOR=73;	
+				
 				
 	// Konstante, die angibt, dass die Semantische Funktion eines Knotens 
 	// undefiniert ist
