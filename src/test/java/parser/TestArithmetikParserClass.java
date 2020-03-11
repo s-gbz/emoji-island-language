@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Stack;
 
 import scanner.TokenList;
 
@@ -32,8 +33,9 @@ public class TestArithmetikParserClass implements TokenList{
 					parseTree.printSyntaxTree(0);
 					//parser.printTokenStream();
 					BufferedWriter bufferedWriter = createBufferedWriter("ParsedProgram.java");
+					Stack<String> stack = new Stack<String>();
 
-					System.out.println("Korrekter Ausdruck mit Wert:" +parseTree.semanticFunction.f(parseTree,PROGRAM, bufferedWriter));
+					System.out.println("Korrekter Ausdruck mit Wert:" +parseTree.semanticFunction.f(parseTree,PROGRAM, bufferedWriter, stack));
 					bufferedWriter.close();
 				}else
 					//Fehlermeldung, falls Ausdruck nicht zu parsen war

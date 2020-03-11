@@ -4,6 +4,7 @@ import parser.SyntaxTree;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.Stack;
 
 public class Operator extends Semantic{
 	//-------------------------------------------------------------------------
@@ -13,11 +14,11 @@ public class Operator extends Semantic{
 	// operator -> num 
 	// operator.f = num.f
 	//-------------------------------------------------------------------------
-	public int f(SyntaxTree t, int n, BufferedWriter bufferedWriter) throws IOException {
+	public int  f(SyntaxTree t, int n, BufferedWriter bufferedWriter, Stack<String> stack) throws IOException {
 		System.out.println("CLASS Operator >>  n: " + n);
 		if (t.getChildNumber()==3){
 			SyntaxTree expression=t.getChild(1);
-			return expression.semanticFunction.f(expression,UNDEFINED, bufferedWriter);
+			return expression.semanticFunction.f(expression,UNDEFINED, bufferedWriter, stack);
 		}else{
 			SyntaxTree num=t.getChild(0);
 			

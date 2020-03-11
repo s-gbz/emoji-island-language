@@ -4,6 +4,7 @@ import parser.SyntaxTree;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.Stack;
 
 public class CompareOperator extends Semantic{
 	//-------------------------------------------------------------------------
@@ -26,7 +27,7 @@ public class CompareOperator extends Semantic{
 	// compareOperator.f=emojiGreaterthenEquals
 
 	//-------------------------------------------------------------------------
-	public int f(SyntaxTree t, int n, BufferedWriter bufferedWriter) throws IOException {
+	public int  f(SyntaxTree t, int n, BufferedWriter bufferedWriter, Stack<String> stack) throws IOException {
 		System.out.println("CLASS COMPAREOPERATOR >> n: " + n);
 		//return t.getToken();
 		return UNDEFINED;

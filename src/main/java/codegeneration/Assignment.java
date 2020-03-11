@@ -4,6 +4,7 @@ import parser.SyntaxTree;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.Stack;
 
 public class Assignment extends Semantic{
 	//-------------------------------------------------------------------------
@@ -14,12 +15,12 @@ public class Assignment extends Semantic{
 	// assignment ->  ident '<-' END_SINGLEQOUTE 'is' 'EMOJI_CHAR' ';'
 	// assigment.f=n
 	//-------------------------------------------------------------------------
-	public int f(SyntaxTree t, int n, BufferedWriter bufferedWriter) throws IOException {
+	public int  f(SyntaxTree t, int n, BufferedWriter bufferedWriter, Stack<String> stack) throws IOException {
 		System.out.println("CLASS ASSIGNMENT >> n: " + n);
 		if(t.getChildNumber()==4) {
 			SyntaxTree expression=t.getChild(2);
 
-			int valueToWrite = expression.semanticFunction.f(expression, UNDEFINED, bufferedWriter);
+			int valueToWrite = expression.semanticFunction.f(expression, UNDEFINED, bufferedWriter, stack);
 			//bufferedWriter.write(t.getChild(0).getLexem() + " = " + valueToWrite + ";´\n");
 
 			return valueToWrite;
@@ -29,7 +30,7 @@ public class Assignment extends Semantic{
 				case ":bar_chart:" : 
 					SyntaxTree expression=t.getChild(2);
 
-					int valueToWrite = expression.semanticFunction.f(expression, UNDEFINED, bufferedWriter);
+					int valueToWrite = expression.semanticFunction.f(expression, UNDEFINED, bufferedWriter, stack);
 					bufferedWriter.write("int " + t.getChild(0).getLexem() + " = " + valueToWrite + ";");
 					return n;
 				case":memo:" :
