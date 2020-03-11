@@ -36,6 +36,8 @@ public class TestArithmetikParserClass implements TokenList{
 					Stack<String> stack = new Stack<String>();
 
 					System.out.println("Korrekter Ausdruck mit Wert:" +parseTree.semanticFunction.f(parseTree,PROGRAM, bufferedWriter, stack));
+
+					writeStackToFile(stack, bufferedWriter);
 					bufferedWriter.close();
 				}else
 					//Fehlermeldung, falls Ausdruck nicht zu parsen war
@@ -47,5 +49,11 @@ public class TestArithmetikParserClass implements TokenList{
 
 	public static BufferedWriter createBufferedWriter(String fileName) throws IOException {
 		return new BufferedWriter(new FileWriter(fileName));
+	}
+
+	public static void writeStackToFile(Stack<String> stack, BufferedWriter bufferedWriter) throws IOException {
+		for (String entry : stack) {
+			bufferedWriter.write(entry);
+		}
 	}
 }

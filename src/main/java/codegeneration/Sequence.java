@@ -13,8 +13,10 @@ public class Sequence extends Semantic{
 		System.out.println("CLASS SEQUENCE >> >> n: " + n);
 		SyntaxTree instruction=t.getChild(1);
 		bufferedWriter.write("{\n");
-		int blalbla = instruction.semanticFunction.f(instruction, UNDEFINED, bufferedWriter, stack);
-		bufferedWriter.write(blalbla);
-		return instruction.semanticFunction.f(instruction, UNDEFINED, bufferedWriter, stack);
+		int valueToWrite = instruction.semanticFunction.f(instruction, UNDEFINED, bufferedWriter, stack);
+		//bufferedWriter.write(valueToWrite);
+		stack.push("\n}");
+
+		return valueToWrite;
 	} 
 }

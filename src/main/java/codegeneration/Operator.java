@@ -18,7 +18,10 @@ public class Operator extends Semantic{
 		System.out.println("CLASS Operator >>  n: " + n);
 		if (t.getChildNumber()==3){
 			SyntaxTree expression=t.getChild(1);
-			return expression.semanticFunction.f(expression,UNDEFINED, bufferedWriter, stack);
+
+			int valueToWrite = expression.semanticFunction.f(expression,UNDEFINED, bufferedWriter, stack);
+			//bufferedWriter.write(valueToWrite);
+			return valueToWrite;
 		}else{
 			SyntaxTree num=t.getChild(0);
 			
@@ -26,7 +29,9 @@ public class Operator extends Semantic{
 			if(	leafValue == '0' || leafValue == '1' || leafValue == '2' || leafValue == '3' || leafValue == '4' || 
 				leafValue == '5' || leafValue == '6' || leafValue == '7' || leafValue == '8' || leafValue == '9' ) 
 			{
-				return Integer.parseInt(num.getLexem());
+				int valueToWrite = Integer.parseInt(num.getLexem());
+				//bufferedWriter.write(leafValue);
+				return valueToWrite;
 			}
 			return UNDEFINED;
 		}		

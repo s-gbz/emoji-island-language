@@ -21,10 +21,19 @@ public class RightExpression extends Semantic{
 		System.out.println("CLASS RightExpression >> n: " + n);
 		if (t.getChildNumber()==3){
 			SyntaxTree symbol=t.getChild(0), term=t.getChild(1), rightExpression=t.getChild(2);
-			
+			int valueToWrite;
+
 			switch(symbol.getLexem()){
-				case ":heavy_plus_sign:" : 	return n+rightExpression.semanticFunction.f(rightExpression,term.semanticFunction.f(term, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
-				case ":heavy_minus_sign:" :	return n-rightExpression.semanticFunction.f(rightExpression,term.semanticFunction.f(term, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
+				case ":heavy_plus_sign:" :
+					valueToWrite = n+rightExpression.semanticFunction.f(rightExpression,term.semanticFunction.f(term, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
+					//bufferedWriter.write(term.getChild(0).getLexem());
+
+					return valueToWrite;
+				case ":heavy_minus_sign:" :
+					valueToWrite = n-rightExpression.semanticFunction.f(rightExpression,term.semanticFunction.f(term, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
+					//bufferedWriter.write(valueToWrite);
+
+					return valueToWrite;
 			default: return UNDEFINED;
 			}
 		}else {

@@ -14,6 +14,9 @@ public class Term extends Semantic{
 		SyntaxTree operator=t.getChild(0), 
 				   rightTerm=t.getChild(1);
 		
-		return rightTerm.semanticFunction.f(rightTerm,operator.semanticFunction.f(operator,UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
+		int valueToWrite = rightTerm.semanticFunction.f(rightTerm,operator.semanticFunction.f(operator,UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
+
+		//bufferedWriter.write(valueToWrite);
+		return valueToWrite;
 	} 	
 }//Term

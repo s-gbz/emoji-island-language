@@ -23,14 +23,20 @@ public class Instruction extends Semantic{
 	// instruction ->   epsilon
 	// instruction.f=n
 	//-------------------------------------------------------------------------
-	public int  f(SyntaxTree t, int n, BufferedWriter bufferedWriter, Stack<String> stack) throws IOException {
+	public int f(SyntaxTree t, int n, BufferedWriter bufferedWriter, Stack<String> stack) throws IOException {
 		System.out.println("CLASS INSTRUCTION >> n: " + n);
+		//bufferedWriter.write(n);
 
 		if(t.getChildNumber()==2) {
 			//instruction.value sagt um welcher instruction = {assigment, while, of, for} es sich handelt
 			SyntaxTree assigmentORwhileORifORfor=t.getChild(0), instruction=t.getChild(1);
-			return instruction.semanticFunction.f(instruction,assigmentORwhileORifORfor.semanticFunction.f(assigmentORwhileORifORfor, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
+			int valueToWrite = instruction.semanticFunction.f(instruction,assigmentORwhileORifORfor.semanticFunction.f(assigmentORwhileORifORfor, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
+
+			//bufferedWriter.write(valueToWrite);
+			return valueToWrite;
 		}else {
+			//bufferedWriter.write(n);
+
 			return n;
 		}
 	} 
