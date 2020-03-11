@@ -23,7 +23,7 @@ public class RightTerm extends Semantic{
 			
 			switch(symbol.getLexem()){
 				case ":heavy_multiplication_x:" : 	return n*rightTerm.semanticFunction.f(rightTerm,operator.semanticFunction.f(operator,UNDEFINED, bufferedWriter), bufferedWriter);
-				case ":heavy_division_sign:" :	return n/rightTerm.semanticFunction.f(rightTerm,operator.semanticFunction.f(operator,UNDEFINED, bufferedWriter), bufferedWriter);
+				case ":heavy_division_sign:" :		return n/rightTerm.semanticFunction.f(rightTerm,operator.semanticFunction.f(operator,UNDEFINED, bufferedWriter), bufferedWriter);
 			default: return UNDEFINED; //Fehler Fall
 			}
 		}else {//Epsilon Fall 

@@ -12,8 +12,10 @@ public class Program extends Semantic{
 		SyntaxTree sequence=t.getChild(1);
 		bufferedWriter.write("public class ParsedProgram {\n" +
 				"    public static void main(String[] args)");
-		bufferedWriter.flush();
-		return sequence.semanticFunction.f(sequence,UNDEFINED, bufferedWriter);
+		int valueToWrite = sequence.semanticFunction.f(sequence,UNDEFINED, bufferedWriter);
+
+		//bufferedWriter.write("}}");
+		return valueToWrite;
 	} 
 }
 

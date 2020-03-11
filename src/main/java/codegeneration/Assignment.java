@@ -18,14 +18,24 @@ public class Assignment extends Semantic{
 		System.out.println("CLASS ASSIGNMENT >> n: " + n);
 		if(t.getChildNumber()==4) {
 			SyntaxTree expression=t.getChild(2);
-			return expression.semanticFunction.f(expression, UNDEFINED, bufferedWriter);
+
+			int valueToWrite = expression.semanticFunction.f(expression, UNDEFINED, bufferedWriter);
+			//bufferedWriter.write(t.getChild(0).getLexem() + " = " + valueToWrite + ";´\n");
+
+			return valueToWrite;
 		}else {
 
 			switch(t.getChild(4).getLexem()) {
 				case ":bar_chart:" : 
 					SyntaxTree expression=t.getChild(2);
-					return expression.semanticFunction.f(expression, UNDEFINED, bufferedWriter);
+
+					int valueToWrite = expression.semanticFunction.f(expression, UNDEFINED, bufferedWriter);
+					bufferedWriter.write("int " + t.getChild(0).getLexem() + " = " + valueToWrite + ";");
+					return n;
 				case":memo:" :
+
+					bufferedWriter.write("char " + t.getChild(0).getLexem() + " = " + t.getChild(2).getLexem() + ";\n");
+
 					return n;
 				default: return n;
 			}

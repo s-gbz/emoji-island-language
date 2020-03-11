@@ -11,7 +11,7 @@ public class Sequence extends Semantic{
 	public int f(SyntaxTree t, int n, BufferedWriter bufferedWriter) throws IOException {
 		System.out.println("CLASS SEQUENCE >> >> n: " + n);
 		SyntaxTree instruction=t.getChild(1);
-		bufferedWriter.write("{");
+		bufferedWriter.write("{\n");
 		int blalbla = instruction.semanticFunction.f(instruction, UNDEFINED, bufferedWriter);
 		bufferedWriter.write(blalbla);
 		return instruction.semanticFunction.f(instruction, UNDEFINED, bufferedWriter);

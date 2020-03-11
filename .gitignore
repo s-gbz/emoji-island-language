@@ -82,3 +82,9 @@ build/libs/emoji-island-language-1.0-SNAPSHOT.jar
 
 .settings/org.eclipse.buildship.core.prefs
 /bin/
+
+ParsedProgram.java
+
+Test.java
+
+.idea/modules/emoji-island-language.test.iml

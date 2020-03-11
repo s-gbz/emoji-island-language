@@ -16,12 +16,14 @@ public class ForAssignment extends Semantic{
 		System.out.println("CLASS FORASSIGNMENT >> n: " + n);
 		if(t.getChildNumber()==3) {
 			SyntaxTree expression=t.getChild(2);
+			bufferedWriter.write("int " + t.getChild(0).getLexem() + " = " + expression.getLexem());
 			return expression.semanticFunction.f(expression,UNDEFINED, bufferedWriter);
 		}else {
 			System.out.println("CLASS ASSIGNMENT >> LEXEM: " + t.getChild(4).getLexem());
 			switch(t.getChild(4).getLexem()) {
-				case ":bar_chart:" : 
+				case ":bar_chart:" :
 					SyntaxTree expression=t.getChild(2);
+					bufferedWriter.write("int " + t.getChild(2).getLexem() + " = " + expression.getLexem());
 					return expression.semanticFunction.f(expression,UNDEFINED, bufferedWriter);
 				default: return n;
 			}
