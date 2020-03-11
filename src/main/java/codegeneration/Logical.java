@@ -18,12 +18,12 @@ public class Logical extends Semantic{
 		System.out.println("CLASS LOGICAL >> n: " + n);
 		if(t.getChildNumber()==2) {
 			SyntaxTree logicalOperator = t.getChild(0), statement = t.getChild(1);
-			int valueToWrite =  statement.semanticFunction.f(statement, logicalOperator.semanticFunction.f(logicalOperator, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
+			int valueToWrite = statement.semanticFunction.f(statement, logicalOperator.semanticFunction.f(logicalOperator, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
 
-			//bufferedWriter.write(statement.getChild(0).getCharacter());
+			//bufferedWriter.write(valueToWrite);
 			return valueToWrite;
 		}else {
-			bufferedWriter.write(n);
+			//bufferedWriter.write(n);
 			return n;
 		}
 

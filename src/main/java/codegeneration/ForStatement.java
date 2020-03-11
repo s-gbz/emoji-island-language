@@ -16,7 +16,9 @@ public class ForStatement extends Semantic{
 
 		SyntaxTree forAssignmentFirst = t.getChild(0), statement = t.getChild(2), forAssignmentSecound = t.getChild(4);
 
-		bufferedWriter.write(forAssignmentFirst.getLexem());
-		return forAssignmentSecound.semanticFunction.f(forAssignmentSecound, statement.semanticFunction.f(statement, forAssignmentFirst.semanticFunction.f(forAssignmentFirst, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack), bufferedWriter, stack);
-	} 
+		int valueToWrite = forAssignmentSecound.semanticFunction.f(forAssignmentSecound, statement.semanticFunction.f(statement, forAssignmentFirst.semanticFunction.f(forAssignmentFirst, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack), bufferedWriter, stack);
+
+		bufferedWriter.write(")");
+		return valueToWrite;
+	}
 }

@@ -17,7 +17,7 @@ public class For extends Semantic{
 		bufferedWriter.write("for(");
 		int valueToWrite = sequence.semanticFunction.f(sequence, forStatement.semanticFunction.f(forStatement, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
 
-		bufferedWriter.write(valueToWrite + ")");
+
 		return valueToWrite;
 	} 
 }

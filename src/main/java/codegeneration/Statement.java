@@ -18,7 +18,7 @@ public class Statement extends Semantic{
 		int valueToWrite = logical.semanticFunction.f(logical, expressionSecound.semanticFunction.f(expressionSecound,
 				compareOperator.semanticFunction.f(compareOperator, expressionFirst.semanticFunction.f(expressionFirst, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack), bufferedWriter, stack), bufferedWriter, stack);
 
-		bufferedWriter.write(valueToWrite);
+		//bufferedWriter.write(valueToWrite);
 		return valueToWrite;
 	}
 }

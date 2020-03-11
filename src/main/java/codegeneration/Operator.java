@@ -14,7 +14,7 @@ public class Operator extends Semantic{
 	// operator -> num 
 	// operator.f = num.f
 	//-------------------------------------------------------------------------
-	public int  f(SyntaxTree t, int n, BufferedWriter bufferedWriter, Stack<String> stack) throws IOException {
+	public int f(SyntaxTree t, int n, BufferedWriter bufferedWriter, Stack<String> stack) throws IOException {
 		System.out.println("CLASS Operator >>  n: " + n);
 		if (t.getChildNumber()==3){
 			SyntaxTree expression=t.getChild(1);

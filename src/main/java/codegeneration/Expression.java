@@ -14,7 +14,7 @@ public class Expression extends Semantic{
 		SyntaxTree term=t.getChild(0), rightExpression=t.getChild(1);
 		int valueToWrite = rightExpression.semanticFunction.f(rightExpression,term.semanticFunction.f(term, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
 
-		//bufferedWriter.write(valueToWrite);
+		//bufferedWriter.write(term.getChild(0).getTokenString());
 		return valueToWrite;
 		} 	
 }//Expression
