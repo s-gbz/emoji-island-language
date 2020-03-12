@@ -14,8 +14,8 @@ public class Sequence extends Semantic{
 		SyntaxTree instruction=t.getChild(1);
 		bufferedWriter.write("{\n");
 		int valueToWrite = instruction.semanticFunction.f(instruction, UNDEFINED, bufferedWriter, stack);
-		//bufferedWriter.write(valueToWrite);
-		stack.push("\n}");
+
+		bufferedWriter.write("\t\n}");
 
 		return valueToWrite;
 	} 

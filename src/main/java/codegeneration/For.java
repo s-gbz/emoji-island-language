@@ -14,7 +14,7 @@ public class For extends Semantic{
 	public int  f(SyntaxTree t, int n, BufferedWriter bufferedWriter, Stack<String> stack) throws IOException {
 		System.out.println("CLASS FOR >> n: " + n);
 		SyntaxTree forStatement = t.getChild(2), sequence = t.getChild(4);
-		bufferedWriter.write("for(");
+		bufferedWriter.write("\n\nfor(");
 		int valueToWrite = sequence.semanticFunction.f(sequence, forStatement.semanticFunction.f(forStatement, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
 
 

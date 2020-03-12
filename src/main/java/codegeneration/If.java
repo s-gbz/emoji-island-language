@@ -17,10 +17,15 @@ public class If extends Semantic{
 		System.out.println("CLASS IF >> n: " + n);
 		if(t.getChildNumber()==5) {
 			SyntaxTree statement = t.getChild(2), sequence = t.getChild(4);
-			return sequence.semanticFunction.f(sequence, statement.semanticFunction.f(statement, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
+			int valueToWrite = sequence.semanticFunction.f(sequence, statement.semanticFunction.f(statement, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
+
+			return valueToWrite;
 		}else {
 			SyntaxTree statement = t.getChild(2), sequence = t.getChild(4), elseTree = t.getChild(5);
-			return elseTree.semanticFunction.f(elseTree, sequence.semanticFunction.f(sequence, statement.semanticFunction.f(statement, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack), bufferedWriter, stack);
+			bufferedWriter.write("\n\nif(");
+			int valueToWrite =  elseTree.semanticFunction.f(elseTree, sequence.semanticFunction.f(sequence, statement.semanticFunction.f(statement, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack), bufferedWriter, stack);
+
+			return valueToWrite;
 		}
 		
 	} 
