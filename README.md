@@ -13,8 +13,8 @@ fn FUNCTION_NAME(VARIABLE_NAME_1 is :EMOJI as Datatype:, VARIABLE_NAME_N is :EMO
 }
 󠀼⚔ # UNEQUAL
 🏳️‍🌈 # EQUAL
-⏩ # LESS THAN
-⏪ # GREATER THAN
+⏩ # GREATER THAN
+⏪ # LESS THAN
 ⏮ => # LESS THAN EQUALS
 ⏭ <= # GREATER THAN EQUALS
 🔗 LOGICAL AND

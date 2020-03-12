@@ -88,3 +88,7 @@ ParsedProgram.java
 Test.java
 
 .idea/modules/emoji-island-language.test.iml
+
+build/resources/test/testdatei_arithmetik_emoji.txt
+
+src/test/resources/testdatei_arithmetik_emoji.txt

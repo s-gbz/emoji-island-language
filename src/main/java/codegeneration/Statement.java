@@ -15,9 +15,12 @@ public class Statement extends Semantic{
 		System.out.println("CLASS STATEMENT >> n: " + n);
 		SyntaxTree expressionFirst = t.getChild(0), compareOperator = t.getChild(1), 
 				expressionSecound = t.getChild(2), logical = t.getChild(3);
+
+		bufferedWriter.write(expressionFirst.getChild(0).getChild(0).getChild(0).getLexem());
+
 		int valueToWrite = logical.semanticFunction.f(logical, expressionSecound.semanticFunction.f(expressionSecound,
 				compareOperator.semanticFunction.f(compareOperator, expressionFirst.semanticFunction.f(expressionFirst, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack), bufferedWriter, stack), bufferedWriter, stack);
-
+		bufferedWriter.write(expressionSecound.getChild(0).getChild(0).getChild(0).getLexem());
 		bufferedWriter.write(")");
 
 		return valueToWrite;

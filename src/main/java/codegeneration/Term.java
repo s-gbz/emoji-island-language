@@ -16,7 +16,7 @@ public class Term extends Semantic{
 		
 		int valueToWrite = rightTerm.semanticFunction.f(rightTerm,operator.semanticFunction.f(operator,UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
 
-		//bufferedWriter.write(valueToWrite);
+		//bufferedWriter.write(operator.getLexem());
 		return valueToWrite;
 	} 	
 }//Term
