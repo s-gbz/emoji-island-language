@@ -19,9 +19,11 @@ public class Assignment extends Semantic{
 		System.out.println("CLASS ASSIGNMENT >> n: " + n);
 		if(t.getChildNumber()==4) {
 			SyntaxTree expression=t.getChild(2);
+			bufferedWriter.write(t.getChild(0).getLexem() + " = " + t.getChild(0).getLexem());
 
 			int valueToWrite = expression.semanticFunction.f(expression, UNDEFINED, bufferedWriter, stack);
-			bufferedWriter.write(t.getChild(0).getLexem() + " = " + valueToWrite + ";\n");
+
+			bufferedWriter.write(";\n");
 
 			return valueToWrite;
 		}else {

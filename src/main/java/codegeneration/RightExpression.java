@@ -26,12 +26,13 @@ public class RightExpression extends Semantic{
 			switch(symbol.getLexem()){
 				case ":heavy_plus_sign:" :
 					valueToWrite = n+rightExpression.semanticFunction.f(rightExpression,term.semanticFunction.f(term, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
-					//bufferedWriter.write(term.getChild(0).getLexem());
+					bufferedWriter.write(t.getChild(1).getLexem());
+					bufferedWriter.write(" + " + t.getChild(1).getChild(0).getChild(0).getLexem());
 
 					return valueToWrite;
 				case ":heavy_minus_sign:" :
 					valueToWrite = n-rightExpression.semanticFunction.f(rightExpression,term.semanticFunction.f(term, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
-					//bufferedWriter.write(valueToWrite);
+					bufferedWriter.write(" - " + t.getChild(1).getChild(0).getChild(0).getLexem());
 
 					return valueToWrite;
 			default: return UNDEFINED;

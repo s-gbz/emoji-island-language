@@ -2,9 +2,9 @@ package codegeneration;
 
 import parser.SyntaxTree;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.Stack;
+import java.util.stream.Collectors;
 
 public class ForAssignment extends Semantic{
 	//-------------------------------------------------------------------------
@@ -18,7 +18,8 @@ public class ForAssignment extends Semantic{
 		int valueToWrite;
 		if(t.getChildNumber()==3) {
 			SyntaxTree expression=t.getChild(2);
-			bufferedWriter.write("; " + t.getChild(0).getLexem() + " = " + expression.getChild(0).getCharacter() + ";");
+
+			bufferedWriter.write("; " + t.getChild(0).getLexem() + " = " + t.getChild(0).getLexem() + "");
 
 			valueToWrite = expression.semanticFunction.f(expression,UNDEFINED, bufferedWriter, stack);
 			//bufferedWriter.write(valueToWrite);
@@ -29,7 +30,7 @@ public class ForAssignment extends Semantic{
 			switch(t.getChild(4).getLexem()) {
 				case ":bar_chart:" :
 					SyntaxTree expression=t.getChild(2);
-					bufferedWriter.write("int " + t.getChild(0).getLexem() + " = " + expression.getLexem());
+					//bufferedWriter.write("int " + t.getChild(0).getLexem() + " = " + expression.getLexem());
 					valueToWrite = expression.semanticFunction.f(expression,UNDEFINED, bufferedWriter, stack);
 					//bufferedWriter.write(valueToWrite);
 					return valueToWrite;
@@ -37,5 +38,5 @@ public class ForAssignment extends Semantic{
 			}
 
 		}
-	} 
+	}
 }
