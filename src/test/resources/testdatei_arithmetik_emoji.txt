@@ -1,0 +1,26 @@
+🚩
+{
+    a <- 1 is 📊;
+    b <- 1 is 📊;
+    c <- 0 is 📊;
+    a <- a ➕ 1 ;
+    ⏳(i <- 3 is 📊 ; i ⏮ a ; i <- i ➖ 1 )
+    {
+        b <- b ➕ 1 ;
+    }
+    ✅(a 🏳️‍🌈 b)
+    {
+       	c <- 3;
+    }
+    ❌
+    {
+       	c <- 4;
+    }
+    index <- 2 is 📊;
+    indexcounter <- 1 is 📊;
+   ⏰(index ⏭ indexcounter)
+   {
+        indexcounter <- indexcounter ➕ 1;
+   }
+}
+🏁
