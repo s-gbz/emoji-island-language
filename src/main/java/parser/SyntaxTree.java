@@ -14,7 +14,6 @@ import java.util.*;
 
 import codegeneration.Assignment;
 import codegeneration.CompareOperator;
-import codegeneration.Digit;
 import codegeneration.Else;
 import codegeneration.Expression;
 import codegeneration.For;
@@ -24,7 +23,6 @@ import codegeneration.If;
 import codegeneration.Instruction;
 import codegeneration.Logical;
 import codegeneration.LogicalOperator;
-import codegeneration.Num;
 import codegeneration.Operator;
 import codegeneration.Program;
 import codegeneration.RightExpression;
@@ -39,22 +37,22 @@ import scanner.TokenList;
 public class SyntaxTree implements TokenList{
 // Attribute 
 
-// linker bzw. rechter Teilbaum (null bei Blättern), rightNode=null,
+// linker bzw. rechter Teilbaum (null bei Blï¿½ttern), rightNode=null,
 // wenn Operator nur einen Operanden hat
 private LinkedList <SyntaxTree> childNodes; 
 
-// Art des Knotens gemäß der Beschreibung in der Schnittstelle Arithmetic
+// Art des Knotens gemï¿½ï¿½ der Beschreibung in der Schnittstelle Arithmetic
 private byte token;
 
-// Zeichen des Knotens, falls es sich um einen Blätterknoten, der ein
-// Eingabezeichen repräsentiert, handelt, d.h. einen Knoten mit dem Token  
+// Zeichen des Knotens, falls es sich um einen Blï¿½tterknoten, der ein
+// Eingabezeichen reprï¿½sentiert, handelt, d.h. einen Knoten mit dem Token  
 // DIGIT oder MATH_SIGN.
 private char character;
 
 private String lexem;
 
 
-// value enthält die semantsiche Funktion des Teilbaums
+// value enthï¿½lt die semantsiche Funktion des Teilbaums
 // mit Wurzelknoten this
 public Semantic semanticFunction;
 
@@ -63,7 +61,7 @@ public Semantic semanticFunction;
 // Konstruktor des Syntaxbaumes 
 //-------------------------------------------------------------------------
 
-// Der Konstruktor bekommt den TokenTyp t des Knotens übergeben
+// Der Konstruktor bekommt den TokenTyp t des Knotens ï¿½bergeben
 SyntaxTree(byte t){
 	this.childNodes= new LinkedList<SyntaxTree>();
 	character=0;
@@ -75,41 +73,41 @@ SyntaxTree(byte t){
 // get und set Methoden des Syntaxbaumes
 //-------------------------------------------------------------------------
 
-// Setzt den Typ des Tokens auf den Übergabeparameter t
-// Zu den möglichen TokenTypen siehe Interface TokenList.java
+// Setzt den Typ des Tokens auf den ï¿½bergabeparameter t
+// Zu den mï¿½glichen TokenTypen siehe Interface TokenList.java
 void setToken(byte t){
 	this.token=t;
 	}
 
-// Gibt den aktuellen Konten des Syntaxbaumes zurück
+// Gibt den aktuellen Konten des Syntaxbaumes zurï¿½ck
 public byte getToken(){
 	return this.token;
 }
 
-// Bei einem Knoten, der ein Eingabezeichen repräsentiert (INPUT_SIGN)
+// Bei einem Knoten, der ein Eingabezeichen reprï¿½sentiert (INPUT_SIGN)
 // wird mit dieser Methode das Zeichen im Knoten gespeichert
 void setCharacter(char character){
 	this.character=character;
 }
 
-// Gibt das zum Knoten gehörende Eingabezeichen zurück
+// Gibt das zum Knoten gehï¿½rende Eingabezeichen zurï¿½ck
 public char getCharacter(){
 	return this.character;
 }
 
-//Bei einem Knoten, der ein Eingabewort repräsentiert (INPUT_SIGN)
+//Bei einem Knoten, der ein Eingabewort reprï¿½sentiert (INPUT_SIGN)
 //wird mit dieser Methode das Wort im Knoten gespeichert
 void setLexem(String lexem){
 	this.lexem=lexem;
 }
 
-//Gibt das zum Knoten gehörende Wort zurück
+//Gibt das zum Knoten gehï¿½rende Wort zurï¿½ck
 public String getLexem(){
 	return this.lexem;
 }
 
 
-// Gibt den Syntaxbaum mit entsprechenden Einrückungen auf der Konsole
+// Gibt den Syntaxbaum mit entsprechenden Einrï¿½ckungen auf der Konsole
 // aus.
 void printSyntaxTree(int t){
 	for(int i=0;i<t;i++)
@@ -124,7 +122,7 @@ void printSyntaxTree(int t){
 	}
 }
 
-// Gibt den zum Zahlenwert passenden String des Tokentyps zurück
+// Gibt den zum Zahlenwert passenden String des Tokentyps zurï¿½ck
 public String getTokenString(){
 	switch(this.token){
 		case  1: return "NUMBER";
@@ -208,13 +206,9 @@ public String getTokenString(){
 
 
 // Bestimmt und speichert die semantsiche Funktion des Kontens in
-// Abhängigkeit vom Knotentyp
+// Abhï¿½ngigkeit vom Knotentyp
 void setSemantikFunction(byte b){
 	switch(b){
-		case 1: semanticFunction=new Num();
-			break;
-		case 2: semanticFunction=new Digit();
-			break; 
 		case 3: semanticFunction=new Assignment();
 			break; 
 		case 15: semanticFunction=new Expression();
@@ -262,7 +256,7 @@ void setSemantikFunction(byte b){
 
 
 // Legt einen neuen Teilbaum als Kind des aktuellen Knotens an und gibt die
-// Referenz auf seine Wurzel zurück
+// Referenz auf seine Wurzel zurï¿½ck
 SyntaxTree insertSubtree(byte b){
 	SyntaxTree node;
 	node=new SyntaxTree(b); 
@@ -271,7 +265,7 @@ SyntaxTree insertSubtree(byte b){
 	}
 
 // Gibt die Refernz der Wurzel des i-ten Kindes des aktuellen 
-// Knotens zurück
+// Knotens zurï¿½ck
 public SyntaxTree getChild(int i){
 	if (i>this.childNodes.size())
 		return null;
@@ -279,12 +273,12 @@ public SyntaxTree getChild(int i){
 		return this.childNodes.get(i);
 	}
 	
-// Gibt die Referenz auf die Liste der Kinder des aktuellen Knotens zurück
+// Gibt die Referenz auf die Liste der Kinder des aktuellen Knotens zurï¿½ck
 LinkedList getChildNodes(){
 	return this.childNodes;
 	}	
 
-// Gibt die Zahl der Kinder des aktuellen Konotens zurück
+// Gibt die Zahl der Kinder des aktuellen Konotens zurï¿½ck
 public int getChildNumber(){
 	return childNodes.size();
 }

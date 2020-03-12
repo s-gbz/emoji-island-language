@@ -4,6 +4,7 @@ import parser.SyntaxTree;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.Stack;
 
 /**
  * Diese Klasse stellt den Rumpf der semantsichen Funktion eines Knotens im
@@ -42,7 +43,7 @@ public class Semantic {
 	 * Im allgemeinen Fall, d.h. ohne Angabe einer Regel, ist die semantische
 	 * Funktion undefiniert
 	 */
-	public int f(SyntaxTree t, int n, BufferedWriter bufferedWriter) throws IOException {
+	public int f(SyntaxTree t, int n, BufferedWriter bufferedWriter, Stack<String> stack) throws IOException {
 		System.out.println("SEMANTIC >> N: "+ n);
 		return UNDEFINED;
 	}
