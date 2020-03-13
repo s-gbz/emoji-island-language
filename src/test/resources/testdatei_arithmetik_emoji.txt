@@ -1,24 +1,30 @@
 🚩
 {
-    a <- 1 is 📊;
-    b <- 1 is 📊;
+    a <- (1 ➕ 3 ➕ 4)➗4 is 📊;
     c <- 0 is 📊;
-    a <- a ➕ 1 ;
-    ⏳(i <- 3 is 📊 ; i ⏮ a ; i <- i ➖ 1 )
-    {
-        b <- b ➕ 1 ;
-    }
-    ✅(a 🏳️‍🌈 b)
+    b <- 0 is 📊;
+   	a <- (a ➕ 5) ✖ 3;
+   	
+   	str <- 'abc' is 📝;
+   	
+   	✅(a🏳️‍🌈 b 🔗  c⏮ b ❔ c⏪ b ❔ c⏩ b ❔ c⚔ a)
     {
        	c <- 3;
     }
-    ❌
+             ❌
     {
        	c <- 4;
     }
+    
+        ⏳(i <- 3 is 📊 ; i ⏮ a ; i <- i ➖ 1 )
+    {
+        b <- b ➕ 1 ;
+    }
+    
     index <- 2 is 📊;
     indexcounter <- 1 is 📊;
-   ⏰(index ⏭ indexcounter)
+    
+  	  ⏰(index ⏭ indexcounter)
    {
         indexcounter <- indexcounter ➕ 1;
    }

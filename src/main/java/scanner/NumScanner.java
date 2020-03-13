@@ -42,7 +42,7 @@ public class NumScanner extends Scanner{
 		/*}*/			{{}, 	{},																											{},		{},		{},		{},		{},		{},																												{},											{},		{},		{},		{},		{},		{},		{},		{},		{},		{}}, 	//LEER		
 		/*START'*/		{{}, 	{},																											{},		{},		{},		{},		{},		{},																												{},											{},		{},		{},		{},		{},		{},		{},		{},		{},		{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'}},
 		/*END'*/		{{}, 	{},																											{},		{},		{},		{},		{},		{},																												{},											{},		{},		{},		{},		{},		{},		{},		{},		{},		{}}, 	//LEER								
-		/*CHAR*/		{{}, 	{},																											{},		{},		{},		{},		{},		{},																												{},											{},		{},		{},		{},		{},		{},		{},		{},		{'\''},		{}}};
+		/*CHAR*/		{{}, 	{},																											{},		{},		{},		{},		{},		{},																												{},											{},		{},		{},		{},		{},		{},		{},		{},		{'\''},	{'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'}}};
 		//				-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 		// Zust�nde zum DEA 
 		byte states[]={START, IDENT, UNDERSCORE, LESS_THAN, ASSIGNMENT_SIGN, FIRST_COLON, EMOJI, EMOJI_CHARACTER, NUM, SEMICOLON, HASHTAG, DOUBLE_QUOTES, OPEN_PARENTHESES, CLOSE_PARENTHESES, OPEN_CURLY_BRACKET, CLOSE_CURLY_BRACKET, START_SINGLEQOUTE, END_SINGLEQOUTE, CHAR_SIGN};
@@ -127,6 +127,9 @@ public class NumScanner extends Scanner{
 			case 71: return "IF";
 			case 72: return "ELSE";
 			case 73: return "FOR";
+			case 74: return "CONDITION";
+			case 75: return "FOR_ASSIGNMENTSECOND";
+			case 76: return "EMOJI_PRINTLN";
 
 		default: return "NO_TOKEN";
 		}

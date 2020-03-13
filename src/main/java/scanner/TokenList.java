@@ -77,7 +77,7 @@ public interface TokenList {
 				EMOJI_MINUS=61,
 				EMOJI_MULT=62,
 				EMOJI_DIV=63,
-				FOR_ASSIGNMENT=64,
+				FOR_ASSIGNMENTFIRST=64,
 				ASSIGNMENT_SIGN=65,
 				WHILE=66,
 				START_SINGLEQOUTE=67,
@@ -86,7 +86,10 @@ public interface TokenList {
 				EXPRESSION_CHAR=70,
 				IF=71,
 				ELSE=72,
-				FOR=73;	
+				FOR=73,
+				CONDITION=74,
+				FOR_ASSIGNMENTSECOND=75,
+				EMOJI_PRINTLN=76;
 				
 				
 	// Konstante, die angibt, dass die Semantische Funktion eines Knotens 

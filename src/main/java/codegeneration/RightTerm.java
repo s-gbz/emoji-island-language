@@ -25,10 +25,12 @@ public class RightTerm extends Semantic{
 
 			switch(symbol.getLexem()){
 				case ":heavy_multiplication_x:" :
+					stack.push("*");
 					valueToWrite= n*rightTerm.semanticFunction.f(rightTerm,operator.semanticFunction.f(operator,UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
 					//bufferedWriter.write(valueToWrite);
 					return valueToWrite;
 				case ":heavy_division_sign:" :
+					stack.push("/");
 					valueToWrite = n/rightTerm.semanticFunction.f(rightTerm,operator.semanticFunction.f(operator,UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
 					//bufferedWriter.write(valueToWrite);
 					return valueToWrite;

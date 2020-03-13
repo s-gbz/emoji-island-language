@@ -15,12 +15,13 @@ public class Operator extends Semantic{
 	// operator.f = num.f
 	//-------------------------------------------------------------------------
 	public int f(SyntaxTree t, int n, BufferedWriter bufferedWriter, Stack<String> stack) throws IOException {
-		System.out.println("CLASS Operator >>  n: " + n);
+		System.out.println("CLASS Operator >>  t: " + t.getChildNumber());
 		if (t.getChildNumber()==3){
 			SyntaxTree expression=t.getChild(1);
-
+			stack.push("(");
 			int valueToWrite = expression.semanticFunction.f(expression,UNDEFINED, bufferedWriter, stack);
 			//bufferedWriter.write(valueToWrite);
+			stack.push(")");
 			return valueToWrite;
 		}else{
 			SyntaxTree num=t.getChild(0);
@@ -31,7 +32,11 @@ public class Operator extends Semantic{
 			{
 				int valueToWrite = Integer.parseInt(num.getLexem());
 				//bufferedWriter.write(leafValue);
+				
+				stack.push(num.getLexem());
 				return valueToWrite;
+			}else {
+				stack.push(num.getLexem());
 			}
 			return UNDEFINED;
 		}		

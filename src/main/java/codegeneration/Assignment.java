@@ -19,12 +19,14 @@ public class Assignment extends Semantic{
 		System.out.println("CLASS ASSIGNMENT >> n: " + n);
 		if(t.getChildNumber()==4) {
 			SyntaxTree expression=t.getChild(2);
-			bufferedWriter.write(t.getChild(0).getLexem() + " = " + t.getChild(0).getLexem());
-
+			
 			int valueToWrite = expression.semanticFunction.f(expression, UNDEFINED, bufferedWriter, stack);
-
+			bufferedWriter.write("\t " + t.getChild(0).getLexem() + " = ");
+			for (String entry : stack) {
+				bufferedWriter.write(entry);
+			}
+			stack.clear();
 			bufferedWriter.write(";\n");
-
 			return valueToWrite;
 		}else {
 
@@ -33,11 +35,20 @@ public class Assignment extends Semantic{
 					SyntaxTree expression=t.getChild(2);
 
 					int valueToWrite = expression.semanticFunction.f(expression, UNDEFINED, bufferedWriter, stack);
-					bufferedWriter.write("int " + t.getChild(0).getLexem() + " = " + valueToWrite + ";");
+					bufferedWriter.write("\t int " + t.getChild(0).getLexem() + " = ");
+					for (String entry : stack) {
+						bufferedWriter.write(entry);
+					}
+					stack.clear();
+					bufferedWriter.write(";\n");
 					return n;
 				case":memo:" :
-
-					bufferedWriter.write("char " + t.getChild(0).getLexem() + " = " + t.getChild(2).getLexem() + ";\n");
+					String str ="\"";
+					for(int i = 0; i<t.getChild(2).getLexem().length()-2;i++) {
+						str = str + t.getChild(2).getLexem().charAt(i+1);
+					}
+					str = str + "\"";
+					bufferedWriter.write("\t String " + t.getChild(0).getLexem() + " = " + str + ";\n");
 					return n;
 				default:
 					//bufferedWriter.write(n);

@@ -28,7 +28,8 @@ import scanner.*;
 	else -> epsilon
 	for -> emojiFor openpar forStatement closepar sequence
 	statement -> expression compareOperator expression logical
-	forStatement -> forassignment ';' statement ';' forassignment
+	forStatement -> forassignment ';' condition ';' forassignment
+	condition -> expression compareOperator expression 
 	logical -> logicalOperator statement 
 	logical -> epsilon
 	compareOperator -> emojiUnequal 
@@ -425,20 +426,20 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 	}//statement
 	
 	//-------------------------------------------------------------------------
-	// forStatement -> forassignment ';' statement ';' forassignment
+	// forStatement -> forassignmentFirst ';' condition ';' forassignmentSecond
 	// Der Parameter sT ist die Wurzel des bis hier geparsten Syntaxbaumes
 	//-------------------------------------------------------------------------
 	boolean checkGrammarRuleForStatement(SyntaxTree sT){
 		byte [] semicolonSet = {SEMICOLON};
 		
-		if(checkGrammarRuleForassignment(sT.insertSubtree(FOR_ASSIGNMENT))) {
+		if(checkGrammarRuleForassignmentFirst(sT.insertSubtree(FOR_ASSIGNMENTFIRST))) {
 			if(match(semicolonSet,sT)) {
-				if(checkGrammarRuleStatement(sT.insertSubtree(STATEMENT))) {
+				if(checkGrammarRuleCondition(sT.insertSubtree(CONDITION))) {
 					if(match(semicolonSet,sT)) {
-						if(checkGrammarRuleForassignment(sT.insertSubtree(FOR_ASSIGNMENT))) {
+						if(checkGrammarRuleForassignmentSecond(sT.insertSubtree(FOR_ASSIGNMENTSECOND))) {
 							return true;
 						}else {
-							syntaxError("Fehler in Forassignment"); 			
+							syntaxError("Fehler in ForassignmentSecond"); 			
 							return false;
 						}
 					}else {
@@ -454,17 +455,27 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 				return false;
 			}	
 		}else {
-			syntaxError("Fehler in Forassignment"); 			
+			syntaxError("Fehler in ForassignmentFirst"); 			
 			return false;
 		}
 	}
 	
 	//-------------------------------------------------------------------------
-	// forassignment ->  ident '<-' expression ||
-	// forassignment ->  ident '<-' expression 'is' EMOJI_INT
+	// condition -> expression compareOperator expression 
 	// Der Parameter sT ist die Wurzel des bis hier geparsten Syntaxbaumes
 	//-------------------------------------------------------------------------
-	boolean checkGrammarRuleForassignment(SyntaxTree sT){
+	boolean checkGrammarRuleCondition(SyntaxTree sT){
+		return 	checkGrammarRuleExpression(sT.insertSubtree(EXPRESSION)) &&
+				checkGrammarRuleCompareOperator(sT.insertSubtree(COMPARE_OPERATOR)) && 
+				checkGrammarRuleExpression(sT.insertSubtree(EXPRESSION));
+	}//statement
+	
+	
+	//-------------------------------------------------------------------------
+	// forassignmentFirst ->  ident '<-' expression 'is' EMOJI_INT
+	// Der Parameter sT ist die Wurzel des bis hier geparsten Syntaxbaumes
+	//-------------------------------------------------------------------------
+	boolean checkGrammarRuleForassignmentFirst(SyntaxTree sT){
 		byte [] assignmentSet = {ASSIGNMENT_SIGN};
 		byte [] variableassignmentSet = {VARIABLE_ASSIGNMENT};
 		byte [] identSet = {IDENT};
@@ -481,12 +492,35 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 			 				syntaxError("Emoji_Int erwartet"); 			
 							return false;
 			 			}
+		 			}else {
+		 				syntaxError("'is' erwartet"); 			
+						return false;
 		 			}
-		 			return true;
 		 		}else{
 					syntaxError("Expression Fehlerhaft"); 			
 					return false;
 				}
+			}else{
+				syntaxError("assignment erwartet"); 			
+				return false;
+			}
+		}else{
+			syntaxError("Ident erwartet"); 			
+			return false;
+		}
+	}
+	
+	//-------------------------------------------------------------------------
+	// forassignmentSecond ->  ident '<-' expression 
+	// Der Parameter sT ist die Wurzel des bis hier geparsten Syntaxbaumes
+	//-------------------------------------------------------------------------
+	boolean checkGrammarRuleForassignmentSecond(SyntaxTree sT){
+		byte [] assignmentSet = {ASSIGNMENT_SIGN};
+		byte [] identSet = {IDENT};
+		
+		if (match(identSet,sT)) {
+			if (match(assignmentSet,sT)) {
+		 		return checkGrammarRuleExpression(sT.insertSubtree(EXPRESSION));
 			}else{
 				syntaxError("assignment erwartet"); 			
 				return false;
@@ -538,15 +572,12 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 	// Der Parameter sT ist die Wurzel des bis hier geparsten Syntaxbaumes
 	//-------------------------------------------------------------------------
 	boolean checkGrammarRuleLogical(SyntaxTree sT){
+		byte [] emojiLogicalOperatorAndSet= {EMOJI_LOGICAL_AND};
+		byte [] emojiLogicalOperatorOrSet= {EMOJI_LOGICAL_OR};
 		SyntaxTree epsilonTree;
-		if (checkGrammarRuleLogicalOperator(sT.insertSubtree(LOGICAL_OPERATOR))) {
-			if (checkGrammarRuleStatement(sT.insertSubtree(STATEMENT))) {
-				return true;
-	   		}else{ 
-	   						
-	 			return false;
-	  		}
-   		}else{ 
+		if(matchDoesNotMoveinputPointer(emojiLogicalOperatorAndSet,sT) || matchDoesNotMoveinputPointer(emojiLogicalOperatorOrSet,sT)) {
+			return checkGrammarRuleLogicalOperator(sT.insertSubtree(LOGICAL_OPERATOR)) && checkGrammarRuleStatement(sT.insertSubtree(STATEMENT));
+		}else{ 
    			epsilonTree = sT.insertSubtree(EPSILON);			
  			return true;
   		}
@@ -565,6 +596,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 		}else if(match(emojiLogicalOrSet,sT)) {
 			return true;
 		}else {
+			syntaxError("logical operator erwartet"); 	
 			return false;
 		}
  

@@ -15,8 +15,20 @@ public class LogicalOperator extends Semantic{
 	// logicalOperator.f=emojiLogicalOr
 	//-------------------------------------------------------------------------
 	public int  f(SyntaxTree t, int n, BufferedWriter bufferedWriter, Stack<String> stack) throws IOException {
-		System.out.println("CLASS LOGICALOPERATOR >> n: " + n);
-		//return t.getToken();
+		System.out.println("CLASS LOGICALOPERATOR >> t: " + t.getChildNumber());
+		SyntaxTree logicalOperator = t.getChild(0);
+		String leafValue = logicalOperator.getTokenString();
+
+		switch (leafValue) {
+			case "EMOJI_LOGICAL_AND":
+				//bufferedWriter.write("==");
+				stack.push(" && ");
+				break;
+			case "EMOJI_LOGICAL_OR":
+				//bufferedWriter.write("!=");
+				stack.push(" || ");
+				break;
+		}
 		return UNDEFINED;
 	} 
 }

@@ -14,10 +14,12 @@ import java.util.*;
 
 import codegeneration.Assignment;
 import codegeneration.CompareOperator;
+import codegeneration.Condition;
 import codegeneration.Else;
 import codegeneration.Expression;
 import codegeneration.For;
-import codegeneration.ForAssignment;
+import codegeneration.ForAssignmentFirst;
+import codegeneration.ForAssignmentSecond;
 import codegeneration.ForStatement;
 import codegeneration.If;
 import codegeneration.Instruction;
@@ -188,7 +190,7 @@ public String getTokenString(){
 		case 61: return "EMOJI_MINUS";
 		case 62: return "EMOJI_MULT";
 		case 63: return "EMOJI_DIV";
-		case 64: return "FOR_ASSIGNMENT";
+		case 64: return "FOR_ASSIGNMENTFIRST";
 		case 65: return "ASSIGNMENT_SIGN";
 		case 66: return "WHILE";
 		case 67: return "START_SINGLEQOUTE";
@@ -198,6 +200,9 @@ public String getTokenString(){
 		case 71: return "IF";
 		case 72: return "ELSE";
 		case 73: return "FOR";
+		case 74: return "CONDITION";
+		case 75: return "FOR_ASSIGNMENTSECOND";
+		case 76: return "EMOJI_PRINTLN";
 		
 		default: return "";
 	}
@@ -237,7 +242,7 @@ void setSemantikFunction(byte b){
 			break;
 		case 57: semanticFunction=new Logical();
 			break;
-		case 64: semanticFunction=new ForAssignment();
+		case 64: semanticFunction=new ForAssignmentFirst();
 			break;
 		case 66: semanticFunction=new While();
 			break;
@@ -246,6 +251,10 @@ void setSemantikFunction(byte b){
 		case 72: semanticFunction=new Else();
 			break;
 		case 73: semanticFunction=new For();
+			break;
+		case 74: semanticFunction=new Condition();
+			break;
+		case 75: semanticFunction=new ForAssignmentSecond();
 			break;
 		
 	default: semanticFunction=new Semantic();

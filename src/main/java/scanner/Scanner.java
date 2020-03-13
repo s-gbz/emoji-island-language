@@ -398,6 +398,8 @@ abstract class Scanner implements TokenList{
 			return EMOJI_DIV;
 		case ":memo:":
 			return EMOJI_CHARACTER;
+		case ":speech_balloon:":
+			return EMOJI_PRINTLN;
 		default:
 			return NO_TYPE;
 		}

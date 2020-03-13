@@ -17,7 +17,7 @@ public class Else extends Semantic{
 		System.out.println("CLASS ELSE >> n: " + n);
 		if(t.getChildNumber()==2) {
 			SyntaxTree sequence = t.getChild(1);
-			bufferedWriter.write("\nelse");
+			bufferedWriter.write(" \t else");
 			int valueToWrite = sequence.semanticFunction.f(sequence, UNDEFINED, bufferedWriter, stack);
 
 			return valueToWrite;

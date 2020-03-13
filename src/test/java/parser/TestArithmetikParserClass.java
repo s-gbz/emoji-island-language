@@ -11,6 +11,10 @@ import scanner.TokenList;
 public class TestArithmetikParserClass implements TokenList{
 
 	public static void main(String args[]) throws IOException {
+		int a=2;
+		for(int i = 0; a+i<5+a && a<19; i++) {
+			
+		}
 		
 		// Anlegen des Wurzelknotens f�r den Syntaxbaum. Dem Konstruktor
 		// wid als Token das Startsymbol der Grammatik �bergeben

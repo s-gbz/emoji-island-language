@@ -15,7 +15,7 @@ public class Program extends Semantic{
 				"    public static void main(String[] args)");
 		int valueToWrite = sequence.semanticFunction.f(sequence,UNDEFINED, bufferedWriter, stack);
 
-		stack.push("\n}");
+		bufferedWriter.write("\t\n}");
 		return valueToWrite;
 	} 
 }
