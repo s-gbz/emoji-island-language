@@ -1,26 +1,26 @@
-🚩
+ðŸš©
 {
-    a <- 1 is 📊;
-    b <- 1 is 📊;
-    c <- 0 is 📊;
-    a <- a ➕ 1 ;
-    ⏳(i <- 3 is 📊 ; i ⏮ a ; i <- i ➖ 1 )
+    a <- 1 is ðŸ“Š;
+    b <- 1 is ðŸ“Š;
+    c <- 0 is ðŸ“Š;
+    a <- a âž• 1 ;
+    â�³(i <- 3 is ðŸ“Š ; i â�® a ; i <- i âž– 1 )
     {
-        b <- b ➕ 1 ;
+        b <- b âž• 1 ;
     }
-    ✅(a 🏳️‍🌈 b)
+    âœ…(a ðŸ�³ï¸�â€�ðŸŒˆ b)
     {
        	c <- 3;
     }
-    ❌
+    â�Œ
     {
        	c <- 4;
     }
-    index <- 2 is 📊;
-    indexcounter <- 1 is 📊;
-   ⏰(index ⏭ indexcounter)
+    index <- 2 is ðŸ“Š;
+    indexcounter <- 1 is ðŸ“Š;
+   â�°(index â�­ indexcounter)
    {
-        indexcounter <- indexcounter ➕ 1;
+        indexcounter <- indexcounter âž• 1;
    }
 }
-🏁
+ðŸ��
