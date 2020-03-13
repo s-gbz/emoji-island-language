@@ -35,7 +35,7 @@ public class Assignment extends Semantic{
 					SyntaxTree expression=t.getChild(2);
 
 					int valueToWrite = expression.semanticFunction.f(expression, UNDEFINED, bufferedWriter, stack);
-					bufferedWriter.write("\t int " + t.getChild(0).getLexem() + " = ");
+					bufferedWriter.write("\n \t int " + t.getChild(0).getLexem() + " = ");
 					for (String entry : stack) {
 						bufferedWriter.write(entry);
 					}
@@ -48,7 +48,7 @@ public class Assignment extends Semantic{
 						str = str + t.getChild(2).getLexem().charAt(i+1);
 					}
 					str = str + "\"";
-					bufferedWriter.write("\t String " + t.getChild(0).getLexem() + " = " + str + ";\n");
+					bufferedWriter.write("\n \t String " + t.getChild(0).getLexem() + " = " + str + ";");
 					return n;
 				default:
 					//bufferedWriter.write(n);

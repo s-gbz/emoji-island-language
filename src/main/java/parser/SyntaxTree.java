@@ -26,6 +26,7 @@ import codegeneration.Instruction;
 import codegeneration.Logical;
 import codegeneration.LogicalOperator;
 import codegeneration.Operator;
+import codegeneration.Println;
 import codegeneration.Program;
 import codegeneration.RightExpression;
 import codegeneration.RightTerm;
@@ -203,6 +204,7 @@ public String getTokenString(){
 		case 74: return "CONDITION";
 		case 75: return "FOR_ASSIGNMENTSECOND";
 		case 76: return "EMOJI_PRINTLN";
+		case 77: return "PRINTLN";
 		
 		default: return "";
 	}
@@ -256,6 +258,8 @@ void setSemantikFunction(byte b){
 			break;
 		case 75: semanticFunction=new ForAssignmentSecond();
 			break;
+		case 77: semanticFunction=new Println();
+		break;
 		
 	default: semanticFunction=new Semantic();
 			break;

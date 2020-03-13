@@ -182,6 +182,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 	//					while instruction | 
 	//					if instruction | 
 	//					for instruction | 
+	//					println instruction |
 	//					epsilon
 	// Der Parameter sT ist die Wurzel des bis hier geparsten Syntaxbaumes
 	//-------------------------------------------------------------------------
@@ -190,6 +191,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 		byte [] emojiWhileSet = {EMOJI_WHILE};
 		byte [] emojiIfSet = {EMOJI_IF};
 		byte [] emojiForSet = {EMOJI_FOR};
+		byte [] emojiPrintlnSet = {EMOJI_PRINTLN};
 		
 		if(matchDoesNotMoveinputPointer(identSet,sT)) {
 			return checkGrammarRuleassignment(sT.insertSubtree(ASSIGNMENT)) && checkGrammarRuleInstruction(sT.insertSubtree(INSTRUCTION));
@@ -199,6 +201,8 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 			return checkGrammarRuleIf(sT.insertSubtree(IF)) && checkGrammarRuleInstruction(sT.insertSubtree(INSTRUCTION));
 		}else if(matchDoesNotMoveinputPointer(emojiForSet,sT)) {
 			return checkGrammarRuleFor(sT.insertSubtree(FOR)) && checkGrammarRuleInstruction(sT.insertSubtree(INSTRUCTION));
+		}else if(matchDoesNotMoveinputPointer(emojiPrintlnSet,sT)) {
+			return checkGrammarRulePrintln(sT.insertSubtree(PRINTLN)) && checkGrammarRuleInstruction(sT.insertSubtree(INSTRUCTION));
 		}else{
   			SyntaxTree epsilonTree = sT.insertSubtree(EPSILON);
   			return true;
@@ -413,6 +417,58 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
  			return false;
   		}
 	}	
+	
+	//-------------------------------------------------------------------------
+	// println -> emojiPrintln openpar End_Singleqout closepar ';' ||
+	// println -> emojiPrintln openpar expression closepar ';'
+	// Der Parameter sT ist die Wurzel des bis hier geparsten Syntaxbaumes
+	//-------------------------------------------------------------------------
+	boolean checkGrammarRulePrintln(SyntaxTree sT){
+		byte [] openParSet= {OPEN_PARENTHESES};
+		byte [] closeParSet= {CLOSE_PARENTHESES};
+		byte [] emojiPrintlnSet= {EMOJI_PRINTLN};
+		byte [] semicolonSet = {SEMICOLON};
+		byte [] charSet = {END_SINGLEQOUTE}; //Example: 'abc'
+
+		if (match(emojiPrintlnSet,sT)) {
+			if (match(openParSet,sT)) {
+				if (match(charSet,sT)){
+					if(match(closeParSet,sT)) {
+						if(match(semicolonSet,sT)) {
+							return true;
+						}else{
+							syntaxError("Semicolon erwartet"); 			
+							return false;
+							}	
+					}else{
+						syntaxError("Geschlossene Klammer erwartet"); 			
+						return false;
+						}
+				}else if(checkGrammarRuleExpression(sT.insertSubtree(EXPRESSION))){
+					if(match(closeParSet,sT)) {
+						if(match(semicolonSet,sT)) {
+							return true;
+						}else{
+							syntaxError("Semicolon erwartet"); 			
+							return false;
+							}	
+					}else{
+						syntaxError("Geschlossene Klammer erwartet"); 			
+						return false;
+					}				
+				}else {
+					syntaxError("String erwartet oder Fehler in expression"); 			
+					return false;
+				}
+			}else{
+				syntaxError("Offene Klammer erwartet"); 			
+				return false;
+			}
+   		}else{ 
+			syntaxError("EmojiWhile erwartet"); 			
+ 			return false;
+  		}
+	}
 	
 	//-------------------------------------------------------------------------
 	// statement -> expression compareOperator expression logical

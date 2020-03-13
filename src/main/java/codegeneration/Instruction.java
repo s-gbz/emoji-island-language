@@ -20,6 +20,9 @@ public class Instruction extends Semantic{
 	// instruction ->   for instruction 
 	// instruction.f=instruction.f(for.f)
 	//
+	// instruction ->   println instruction 
+	// instruction.f=instruction.f(println.f)
+	//
 	// instruction ->   epsilon
 	// instruction.f=n
 	//-------------------------------------------------------------------------
@@ -28,8 +31,8 @@ public class Instruction extends Semantic{
 
 		if(t.getChildNumber()==2) {
 			//instruction.value sagt um welcher instruction = {assigment, while, of, for} es sich handelt
-			SyntaxTree assigmentORwhileORifORfor=t.getChild(0), instruction=t.getChild(1);
-			int valueToWrite = instruction.semanticFunction.f(instruction,assigmentORwhileORifORfor.semanticFunction.f(assigmentORwhileORifORfor, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
+			SyntaxTree assigmentORwhileORifORforORPrintln=t.getChild(0), instruction=t.getChild(1);
+			int valueToWrite = instruction.semanticFunction.f(instruction,assigmentORwhileORifORforORPrintln.semanticFunction.f(assigmentORwhileORifORforORPrintln, UNDEFINED, bufferedWriter, stack), bufferedWriter, stack);
 			return valueToWrite;
 		}else {
 			return n;

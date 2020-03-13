@@ -89,7 +89,8 @@ public interface TokenList {
 				FOR=73,
 				CONDITION=74,
 				FOR_ASSIGNMENTSECOND=75,
-				EMOJI_PRINTLN=76;
+				EMOJI_PRINTLN=76,
+				PRINTLN=77;
 				
 				
 	// Konstante, die angibt, dass die Semantische Funktion eines Knotens 

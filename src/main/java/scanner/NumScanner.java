@@ -130,6 +130,7 @@ public class NumScanner extends Scanner{
 			case 74: return "CONDITION";
 			case 75: return "FOR_ASSIGNMENTSECOND";
 			case 76: return "EMOJI_PRINTLN";
+			case 77: return "PRINTLN";
 
 		default: return "NO_TOKEN";
 		}
