@@ -12,7 +12,7 @@ public class Program extends Semantic{
 	public int  f(SyntaxTree t, int n, BufferedWriter bufferedWriter, Stack<String> stack) throws IOException {
 		SyntaxTree sequence=t.getChild(1);
 		bufferedWriter.write("public class ParsedProgram {\n" +
-				"    public static void main(String[] args)");
+				"    public static void run()");
 		int valueToWrite = sequence.semanticFunction.f(sequence,UNDEFINED, bufferedWriter, stack);
 
 		bufferedWriter.write("\t\n}");
