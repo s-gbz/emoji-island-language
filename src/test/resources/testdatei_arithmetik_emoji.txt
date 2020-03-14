@@ -1,11 +1,10 @@
 🚩
 {
-	
+	💬('neuerft');
 	💬('hi sergej');
     💬('hi nils');
     💬('hi leon');
     💬('hi herr ritschel');
-
     a <- (1 ➕ 3 ➕ 4)➗4 is 📊;
     c <- 0 is 📊;
     b <- 0 is 📊;

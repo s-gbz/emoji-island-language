@@ -11,21 +11,21 @@ import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.Arrays;
 import java.util.Stack;
+import java.util.concurrent.TimeUnit;
 
 import scanner.TokenList;
 
-import javax.tools.JavaCompiler;
-import javax.tools.StandardJavaFileManager;
-import javax.tools.StandardLocation;
-import javax.tools.ToolProvider;
+import javax.tools.*;
 
 public class TestArithmetikParserClass implements TokenList{
 
 	private final static String sourceFilePath = "src//test//resources//";
 	private final static String sourceFileName = "ParsedProgram.java";
 	private final static String sourceFileClassName = "ParsedProgram";
+	private static Boolean compilationNotFinished = true;
+	private final static Object compilationLock = new Object();
 
-	public static void main(String args[]) throws IOException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+	public static synchronized void main(String args[]) throws IOException, ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException, InterruptedException {
 		int a=2;
 		for(int i = 0; a+i<5+a && a<19; i++) {
 			
@@ -51,7 +51,7 @@ public class TestArithmetikParserClass implements TokenList{
 					//Ausgabe des Syntaxbaumes und des sematischen Wertes
 					parseTree.printSyntaxTree(0);
 					//parser.printTokenStream();
-					BufferedWriter bufferedWriter = createBufferedWriter();
+					BufferedWriter bufferedWriter = createBufferedWriter(sourceFilePath + sourceFileName);
 					Stack<String> stack = new Stack<String>();
 
 					System.out.println("Korrekter Ausdruck mit Wert:" +parseTree.semanticFunction.f(parseTree,PROGRAM, bufferedWriter, stack));
@@ -59,6 +59,7 @@ public class TestArithmetikParserClass implements TokenList{
 					writeStackToFile(stack, bufferedWriter);
 					bufferedWriter.close();
 
+					createDummyClassFile();
 					compileParsedProgram();
 					Class compiledClass = loadClass();
 					executeCompiledClass(compiledClass);
@@ -70,8 +71,8 @@ public class TestArithmetikParserClass implements TokenList{
 				System.out.println("Fehler in lexikalischer Analyse");
 	}//main
 
-	private static BufferedWriter createBufferedWriter() throws IOException {
-		return new BufferedWriter(new FileWriter(sourceFilePath + sourceFileName));
+	private static BufferedWriter createBufferedWriter(String fileName) throws IOException {
+		return new BufferedWriter(new FileWriter(fileName));
 	}
 
 	private static void writeStackToFile(Stack<String> stack, BufferedWriter bufferedWriter) throws IOException {
@@ -80,34 +81,54 @@ public class TestArithmetikParserClass implements TokenList{
 		}
 	}
 
+	private static void createDummyClassFile() throws IOException {
+		BufferedWriter bufferedWriter = createBufferedWriter(sourceFilePath + sourceFileClassName + ".class");
+		bufferedWriter.close();
+	}
+
 	private static void compileParsedProgram() throws IOException {
-		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-		StandardJavaFileManager fileManager =
-				compiler.getStandardFileManager(null, null, null);
+		synchronized(compilationLock) {
+			DiagnosticCollector<JavaFileObject> diagnostics = new DiagnosticCollector<JavaFileObject>();
+			JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+			StandardJavaFileManager fileManager =
+					compiler.getStandardFileManager(diagnostics, null, null);
 
-		fileManager.setLocation(StandardLocation.CLASS_PATH,
-				Arrays.asList(new File("")));
+			fileManager.setLocation(StandardLocation.CLASS_PATH,
+					Arrays.asList(new File("")));
 
-		File sourceFile = new File(sourceFilePath + sourceFileName);
-		compiler.getTask(null,
-				fileManager,
-				null,
-				null,
-				null,
-				fileManager.getJavaFileObjectsFromFiles(Arrays.asList(sourceFile)))
-				.call();
-		fileManager.close();
+			File sourceFile = new File(sourceFilePath + sourceFileName);
+			compiler.getTask(null,
+					fileManager,
+					null,
+					null,
+					null,
+					fileManager.getJavaFileObjectsFromFiles(Arrays.asList(sourceFile)))
+					.call();
+			fileManager.close();
+
+			compilationLock.notify();
+			compilationNotFinished = false;
+		}
 	}
 
-	private static Class loadClass() throws MalformedURLException, ClassNotFoundException {
-		URLClassLoader urlClassLoader = URLClassLoader.newInstance(new URL[] {
-				new URL(
-						"file:///" + sourceFilePath
-				)
-		});
+	private static Class loadClass() throws MalformedURLException, ClassNotFoundException, InterruptedException {
+		Class loadedClass = null;
+		synchronized (compilationLock) {
+			while (compilationNotFinished) {
+				compilationLock.wait();
+			}
 
-		return urlClassLoader.loadClass(sourceFileClassName);
+			URLClassLoader urlClassLoader = URLClassLoader.newInstance(new URL[]{
+					new URL(
+							"file:///" + sourceFilePath
+					)
+			});
+
+			loadedClass = urlClassLoader.loadClass(sourceFileClassName);
+		}
+		return loadedClass;
 	}
+
 
 	private static void executeCompiledClass(Class compiledClass) {
 		try {
