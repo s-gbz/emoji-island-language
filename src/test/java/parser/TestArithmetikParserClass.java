@@ -60,8 +60,8 @@ public class TestArithmetikParserClass implements TokenList{
 					bufferedWriter.close();
 
 					compileParsedProgram();
-					loadClass();
-					//executeCompiledFile();
+					Class compiledClass = loadClass();
+					executeCompiledClass(compiledClass);
 				}else
 					//Fehlermeldung, falls Ausdruck nicht zu parsen war
 					System.out.println("Fehler im Ausdruck");
@@ -99,33 +99,28 @@ public class TestArithmetikParserClass implements TokenList{
 		fileManager.close();
 	}
 
-	private static void executeCompiledFile() {
-		try {
-			Class params[] = {};
-			Object paramsObj[] = {};
-			Class thisClass = Class.forName(sourceFileClassName);
-			Object iClass = thisClass.newInstance();
-			Method thisMethod = thisClass.getDeclaredMethod("run", params);
-			thisMethod.invoke(iClass, paramsObj);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	private static void loadClass() throws MalformedURLException, ClassNotFoundException, IllegalAccessException, InstantiationException, InvocationTargetException, NoSuchMethodException {
-
+	private static Class loadClass() throws MalformedURLException, ClassNotFoundException {
 		URLClassLoader urlClassLoader = URLClassLoader.newInstance(new URL[] {
 				new URL(
 						"file:///" + sourceFilePath
 				)
 		});
 
-		Class params[] = {};
-		Object paramsObj[] = {};
-		Class thisClass = urlClassLoader.loadClass(sourceFileClassName);
-		Object iClass = thisClass.newInstance();
-		Method thisMethod = thisClass.getDeclaredMethod("run", params);
-		thisMethod.invoke(iClass, paramsObj);
+		return urlClassLoader.loadClass(sourceFileClassName);
+	}
+
+	private static void executeCompiledClass(Class compiledClass) {
+		try {
+			Class params[] = {};
+			Object paramsObj[] = {};
+
+			Object classInstance = compiledClass.newInstance();
+			Method runMethod = compiledClass.getDeclaredMethod("run", params);
+
+			runMethod.invoke(classInstance, paramsObj);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
