@@ -58,11 +58,14 @@ public class TestArithmetikParserClass implements TokenList{
 
 					writeStackToFile(stack, bufferedWriter);
 					bufferedWriter.close();
+					System.out.println("\n\n\n\n\n\n\n");
+
 
 					createDummyClassFile();
 					compileParsedProgram();
 					Class compiledClass = loadClass();
 					executeCompiledClass(compiledClass);
+
 				}else
 					//Fehlermeldung, falls Ausdruck nicht zu parsen war
 					System.out.println("Fehler im Ausdruck");

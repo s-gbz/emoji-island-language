@@ -91,3 +91,13 @@ Test.java
 
 
 build/resources/test/testdatei_arithmetik_emoji.txt
+
+*.css
+
+*.html
+
+*.bin
+
+*.idx
+
+*.js

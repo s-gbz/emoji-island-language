@@ -1,46 +1,93 @@
 🚩
 {
-	💬('neuerft');
-	💬('hi sergej');
-    💬('hi nils');
-    💬('hi leon');
-    💬('hi herr ritschel');
+	💬('hello world');
+    begruessung <- 'und willkommen zu compilerbau' is 📝;
+	💬(begruessung);
+    
+    addition <- 1 ➕ 1 is 📊;
+    substraktion <- addition ➖ 1 is 📊;
+
+    ✅(addition ⚔ substraktion)
+    {
+       	💬('wertungleich');
+    }
+    ❌
+    {
+       	💬('wertgleich');
+    }
+    
+    faktor <- 2 is 📊;
+    
+    multiplikation <- (substraktion ✖ faktor) is 📊;
+    division <- (addition ➗ faktor) is 📊;
+    
+    ✅(multiplikation 🏳️‍🌈 division)
+    {
+        💬('faktorgleich');
+    }
+    ❌
+    {
+       	💬('faktorungleich');
+    }
+    
+    💬('addition');
+    💬(addition);
+    💬('substraktion');
+    💬(substraktion);
+    💬('faktor');
+    💬(faktor);
+    💬('division');
+    💬(division);
+    
     a <- (1 ➕ 3 ➕ 4)➗4 is 📊;
     c <- 0 is 📊;
     b <- 0 is 📊;
    	a <- (a ➕ 5) ✖ 3;
    	a <- (a ➕ 5) ✖ 3;
+    💬(a);
    	
+    💬('addition in ausgabe');
    	💬(5➕64);
    	💬('xd');
-   	
-   	
-   	💬(a);
-   	
-   	str <- 'abc' is 📝;
-   	
-   	💬(str);
-   	
-   	✅(a🏳️‍🌈 b 🔗  c⏮ b ❔ c⏪ b ❔ c⏩ b ❔ c⚔ a)
+    
+    zeichen <- 'a' is 📝;
+    zeichena <- 'a' is 📝;
+    
+    ✅(zeichen 🏳️‍🌈 zeichena)
+    {
+       	💬('zeichengleich');
+    }
+    ❌
+    {
+       	💬('zeichenungleich');
+    }
+    
+   	✅(a 🏳️‍🌈 b 🔗 c ⏮ b ❔ c ⏪ b ❔ c ⏩ b ❔ c ⚔ a)
     {
        	c <- 3;
     }
-             ❌
+    ❌
     {
        	c <- 4;
     }
+    💬('c ist');
+    💬(c);
     
-        ⏳(i <- 3 is 📊 ; i ⏮ a ; i <- i ➖ 1 )
+    kleinergleich <- 2 is 📊;
+            
+    ⏳(i <- 4 is 📊 ; i ⏭ kleinergleich ; i <- i ➖ 1 )
     {
-        b <- b ➕ 1 ;
+        💬('groessergleich');
     }
     
-    index <- 2 is 📊;
-    indexcounter <- 1 is 📊;
+    index <- 1 is 📊;
+    indexcounter <- 2 is 📊;
     
-  	  ⏰(index ⏭ indexcounter)
+  	  ⏰(index ⏮ indexcounter)
    {
-        indexcounter <- indexcounter ➕ 1;
+        index <- index ➕ 1;
+        💬('kleinergleich');
    }
+   💬('ende');
 }
 🏁
