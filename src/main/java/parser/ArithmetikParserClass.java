@@ -8,7 +8,7 @@ import scanner.*;
 	ArithmetikParserClass.java
 	
 	Diese Java Klasse implementiert einen Parser zum Erkennen von
-	Ausdrücken gemäß folgenden Grammatikregeln:
+	Ausdrï¿½cken gemï¿½ï¿½ folgenden Grammatikregeln:
 	
 	program -> emojiStartCode sequence emojiEndCode
 	sequence -> '{' instruction '}'
@@ -58,14 +58,14 @@ import scanner.*;
 	operator -> openPar expression closePar | num | ident
 	
 	
-	Epsilon steht hier für das "leere Wort"
+	Epsilon steht hier fï¿½r das "leere Wort"
 	
 	Der Parser verarbeitet den Token Strom, der durch den Scanner bei der
 	lexikalischen Analyse der Eingabe erzeugt wurde.
 	
 	Der Parser ist nach dem Prinzip des rekursiven Abstiegs programmiert,
 	d.h. jedes nicht terminale Symbol der Grammatik wird durch eine 
-	Methode in Java repräsentiert, die die jeweils anderen nicht terminalen
+	Methode in Java reprï¿½sentiert, die die jeweils anderen nicht terminalen
 	Symbole auf der rechten Seite der Grammatik Regeln ggf. auch rekursiv
 	aufruft.
 	
@@ -74,12 +74,12 @@ import scanner.*;
 	Eingabewert.
 	
 	Ist der zu parsende Ausdruck syntaktisch nicht korrekt, so werden 
-	über die Methode syntaxError() entsprechende Fehlermeldungen ausgegeben.
+	ï¿½ber die Methode syntaxError() entsprechende Fehlermeldungen ausgegeben.
 	
-	Zusätzlich werden den Methoden der Klasse neben der Rekursionstiefe auch
-	eine Referenz auf eine Instanz der Klasse SyntaxTree übergeben.
+	Zusï¿½tzlich werden den Methoden der Klasse neben der Rekursionstiefe auch
+	eine Referenz auf eine Instanz der Klasse SyntaxTree ï¿½bergeben.
 	
-	Über die Instanzen der Klasse SyntaxTree wird beim rekursiven Abstieg
+	ï¿½ber die Instanzen der Klasse SyntaxTree wird beim rekursiven Abstieg
 	eine konkreter Syntaxbaum des geparsten Ausdrucks aufgebaut.
 
 */
@@ -96,7 +96,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 	//------------Konstruktor der Klasse ArithmetikParserClass-----------------
 	//-------------------------------------------------------------------------
 	
-	ArithmetikParserClass(SyntaxTree parseTree){
+	public ArithmetikParserClass(SyntaxTree parseTree){
 		this.parseTree=parseTree;
 		//this.input = new char[256];
 		this.inputPointer=0;
@@ -114,12 +114,12 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 	//-------------------------------------------------------------------------
 	//-------------------Methoden der Grammatik--------------------------------
 	//-------------------------------------------------------------------------
-	// Folgende Methoden überprüfen, ob der eingegeben Code vom Syntax her 
-	// korrekt ist. Dazu überprüft jede Methode einzelnt die über ihr 
+	// Folgende Methoden ï¿½berprï¿½fen, ob der eingegeben Code vom Syntax her 
+	// korrekt ist. Dazu ï¿½berprï¿½ft jede Methode einzelnt die ï¿½ber ihr 
 	// beschriebene Regel der Grammatik.
 	// Ist der jeweilige Grammatikregel syntaktisch korrekt, so gibt die 
-	// Methode True zurück, ansonsten False. Erst wenn die Methode 
-	// "checkGrammarRuleProgramm" true zurück gibt, ist der gesamte Code vom
+	// Methode True zurï¿½ck, ansonsten False. Erst wenn die Methode 
+	// "checkGrammarRuleProgramm" true zurï¿½ck gibt, ist der gesamte Code vom
 	// Syntax her korrekt.
 	//-------------------------------------------------------------------------
 	
@@ -127,7 +127,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 	// program -> emojiStartCode sequence emojiEndCode
 	// Der Parameter sT ist die Wurzel des bis hier geparsten Syntaxbaumes
 	//-------------------------------------------------------------------------
-	boolean checkGrammarRuleProgram(SyntaxTree sT){
+	public boolean checkGrammarRuleProgram(SyntaxTree sT){
 		byte [] emojiStartCodeSet = {EMOJI_START_CODE};
 		byte [] emojiEndCodeSet = {EMOJI_END_CODE};
 
@@ -265,7 +265,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 						return false;
 		 			}
 		 		} else {
-	 				syntaxError("Expression fehlerhaft oder einfacher Anführungsstrich erwartet"); 			
+	 				syntaxError("Expression fehlerhaft oder einfacher Anfï¿½hrungsstrich erwartet"); 			
 					return false;
 	 			}
 			}else{
@@ -675,7 +675,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 				if(match(endSingleQouteSet,sT)){
 					return true;
 				}else {
-					syntaxError("Einfacher Anführungsstrich erwartet"); 
+					syntaxError("Einfacher Anfï¿½hrungsstrich erwartet"); 
 					return false;
 				}
 			}else {
@@ -683,7 +683,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 				return false;
 			}
 		}else {	
-			syntaxError("Einfacher Anführungsstrich erwartet"); 
+			syntaxError("Einfacher Anfï¿½hrungsstrich erwartet"); 
   			return false;
 		}				
 	}
@@ -795,9 +795,9 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 
 	//-------------------------------------------------------------------------		
 	// Methode, die testet, ob das aktuele Token unter den Token
-	// ist, die als Parameter (matchSet) übergeben wurden.
-	// Ist das der Fall, so gibt match() true zurück und setzt den Eingabe-
-	// zeiger auf das nächste Zeichen, sonst wird false zurückgegeben.
+	// ist, die als Parameter (matchSet) ï¿½bergeben wurden.
+	// Ist das der Fall, so gibt match() true zurï¿½ck und setzt den Eingabe-
+	// zeiger auf das nï¿½chste Zeichen, sonst wird false zurï¿½ckgegeben.
 	//-------------------------------------------------------------------------
 	boolean match(byte [] matchSet, SyntaxTree sT){
 		SyntaxTree node;
@@ -808,7 +808,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 				node = sT.insertSubtree(tokenStream.get(inputPointer).token);
 				node.setLexem(tokenStream.get(inputPointer).lexem);
 				node.setCharacter(tokenStream.get(inputPointer).lexem.charAt(0));
-				inputPointer++;	//EingabeinputPointer auf das nächste Zeichen setzen 
+				inputPointer++;	//EingabeinputPointer auf das nï¿½chste Zeichen setzen 
 				System.out.println("Lexem: " + tokenStream.get(inputPointer).lexem);
 				return true;
 			}
@@ -818,8 +818,8 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 	
 	//-------------------------------------------------------------------------		
 	// Methode, die testet, ob das aktuele Token unter den Token
-	// ist, die als Parameter (matchSet) übergeben wurden.
-	// Ist das der Fall, so gibt match() true zurück, sonst wird false zurückgegeben.
+	// ist, die als Parameter (matchSet) ï¿½bergeben wurden.
+	// Ist das der Fall, so gibt match() true zurï¿½ck, sonst wird false zurï¿½ckgegeben.
 	//-------------------------------------------------------------------------
 	boolean matchDoesNotMoveinputPointer(byte [] matchSet, SyntaxTree sT){
 		SyntaxTree node;
@@ -827,7 +827,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 			if (tokenStream.get(inputPointer).token==matchSet[i]){
 				// gefundenes Token in den Syntaxbaum eintragen
 				//sT.insertSubtree(tokenStream.get(inputPointer).token);
-				//inputPointer++;	//EingabeinputPointer auf das nächste Zeichen setzen 
+				//inputPointer++;	//EingabeinputPointer auf das nï¿½chste Zeichen setzen 
 				System.out.println("Lexem: " + tokenStream.get(inputPointer).lexem);
 				return true;
 			}
@@ -837,8 +837,8 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 	
 	//-------------------------------------------------------------------------
 	//Methode, die testet, ob das auf das aktuelle Token folgende Token
-	//unter den Token ist, die als Parameter (aheadSet) übergeben wurden.
-	//Der EingabeinputPointer wird nicht verändert!
+	//unter den Token ist, die als Parameter (aheadSet) ï¿½bergeben wurden.
+	//Der EingabeinputPointer wird nicht verï¿½ndert!
 	//-------------------------------------------------------------------------
 	boolean lookAhead(byte [] aheadSet){
 		for (int i=0;i<aheadSet.length;i++) {
@@ -856,7 +856,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 	// Methode, die testet, ob das Ende der Eingabe erreicht ist
 	// (inputPointer == maxInputPointer)
 	//-------------------------------------------------------------------------
-	boolean inputEmpty(){
+	public boolean inputEmpty(){
 		if (inputPointer==(tokenStream.size()-1)){
 			output("Eingabe leer!",0);
 			return true;
@@ -869,7 +869,7 @@ public class ArithmetikParserClass extends NumScanner implements TokenList{
 
 
 	//-------------------------------------------------------------------------	
-	// Methode zum korrekt eingerückten Ausgeben des Syntaxbaumes auf der 
+	// Methode zum korrekt eingerï¿½ckten Ausgeben des Syntaxbaumes auf der 
 	// Konsole 
 	//-------------------------------------------------------------------------
 	void output(String s, int t){

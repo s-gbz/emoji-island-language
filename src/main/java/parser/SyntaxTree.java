@@ -65,7 +65,7 @@ public Semantic semanticFunction;
 //-------------------------------------------------------------------------
 
 // Der Konstruktor bekommt den TokenTyp t des Knotens �bergeben
-SyntaxTree(byte t){
+public SyntaxTree(byte t){
 	this.childNodes= new LinkedList<SyntaxTree>();
 	character=0;
 	lexem = "";
@@ -112,7 +112,7 @@ public String getLexem(){
 
 // Gibt den Syntaxbaum mit entsprechenden Einr�ckungen auf der Konsole
 // aus.
-void printSyntaxTree(int t){
+public void printSyntaxTree(int t){
 	for(int i=0;i<t;i++)
 	  System.out.print("  ");
 	System.out.print(this.getTokenString());  		
